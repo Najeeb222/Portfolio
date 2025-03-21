@@ -1,0 +1,34 @@
+# Node modules
+node_modules/
+.vite/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+pnpm-error.log*
+
+# Environment variables
+.env*
+!.env.example
+
+# Build output
+dist/
+build/
+.out/
+
+# Editor settings and system files
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Cache
+.cache/
+*.cache
+.eslintcache
+jest-cache/
+jest-transform-cache/
+

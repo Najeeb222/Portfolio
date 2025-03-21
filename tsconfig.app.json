@@ -1,0 +1,47 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@utils/*": ["src/utils/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@contexts/*": ["src/contexts/*"],
+      "@services/*": ["src/services/*"],
+      "@constants/*": ["src/constants/*"],
+      "@libs/*": ["src/libs/*"],
+      "@hocs/*": ["src/hocs/*"],
+      "@modules/*": ["src/modules/*"],
+      "@layouts/*": ["src/layout/*"],
+      "@models/*": ["src/collections/*"],
+      "@styles/*": ["src/styles/*"],
+      "@screens/*": ["src/screens/*"],
+      "@validations/*": ["src/validations/*"],
+      "@actions/*": ["src/actions/*"],
+      "@databaseServices/*": ["src/databaseServices/*"],
+      "@appServices/*": ["src/appServices/*"],
+      "@collections/*": ["src/collections/*"]
+    },
+
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "node", // use 'bundler' to resolve index files
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src"]
+}
