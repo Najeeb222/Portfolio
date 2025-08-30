@@ -1,20 +1,30 @@
-
-
-export const designSkill = [
-  { title: "PHOTOSHOP", value: 100 },
-  { title: "FIGMA", value: 95 },
-  { title: "ADOBE XD", value: 60 },
-  { title: "ADOBE ILLUSTRATOR", value: 70 },
-  { title: "DESIGN", value: 90 },
-];
+// export const designSkill = [
+//   { title: "PHOTOSHOP", value: 100 },
+//   { title: "FIGMA", value: 95 },
+//   { title: "ADOBE XD", value: 70 },
+//   { title: "ADOBE ILLUSTRATOR", value: 80 },
+//   { title: "UI/UX DESIGN", value: 90 },
+// ];
 
 export const developmentSkill = [
-  { title: "HTML", value: 85 },
-  { title: "CSS", value: 80 },
+  { title: "HTML", value: 90 },
+  { title: "CSS", value: 85 },
   { title: "JAVASCRIPT", value: 90 },
-  { title: "SOFTWARE", value: 75 },
-  { title: "PLUGIN", value: 70 },
+  { title: "TYPESCRIPT", value: 80 },
+  { title: "REACT", value: 90 },
+  { title: "NEXT.JS", value: 80 },
+  { title: "TAILWIND CSS", value: 85 },
+  { title: "BOOTSTRAP", value: 80 },
+  { title: "DAISYUI", value: 75 },
+  { title: "MATERIAL UI", value: 80 },
+  { title: "REACT QUERY", value: 85 },
+  { title: "FIREBASE", value: 75 },
+  { title: "APPWRITE", value: 70 },
+  { title: "NODE BASICS", value: 60 },
+  { title: "GITHUB", value: 85 },
+  { title: "API INTEGRATION", value: 80 },
 ];
+
 export const navItems = [
   { title: "HOME", path: "#home" },
   { title: "FEATURES", path: "#features" },

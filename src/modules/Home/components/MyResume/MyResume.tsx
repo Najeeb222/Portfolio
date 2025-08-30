@@ -8,40 +8,46 @@ import {
   Tab,
   Typography,
   Grid,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { useState } from "react";
 import InterviewTab from "../InterviewTab/InterviewTab";
 import SkillSection from "../SkillSection/SkillSection";
-import { designSkill, developmentSkill } from "@constants/data";
-
+import { developmentSkill } from "@constants/data";
 
 const MyResume = () => {
-  const [value, setValue] = useState("Education");
+  const [value, setValue] = useState("Professional_Skill");
+
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm")); // mobile
 
   const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
-
   return (
-    <Container maxWidth="lg" disableGutters component={'section'} id="resume">
+    <Container maxWidth="lg" disableGutters component={"section"} id="resume">
       <Stack sx={{ textAlign: "center", gap: "15px" }}>
         <Typography
           variant="body2"
-          sx={{ letterSpacing: "2px", fontWeight: 500, color: COLORS.subtitle }}
-    
+          sx={{
+            letterSpacing: "2px",
+            fontWeight: 500,
+            color: COLORS.subtitle,
+            fontSize: { xs: "12px", sm: "14px", md: "16px" },
+          }}
         >
-          7+ Years of Experience
+          2+ Years of Experience
         </Typography>
         <Typography
           variant="h2"
           sx={{
             marginBottom: "30px",
             fontWeight: "700",
-            fontSize: { md: "60px", xs: "34px", sm: "40px" },
+            fontSize: { xs: "28px", sm: "36px", md: "60px" },
             color: COLORS.bodyWhite,
           }}
-    
         >
           My Resume
         </Typography>
@@ -51,52 +57,47 @@ const MyResume = () => {
         <Tabs
           value={value}
           onChange={handleChange}
-          variant="scrollable"
+          orientation={isSmallScreen ? "vertical" : "horizontal"} // responsive orientation
+          variant={isSmallScreen ? "scrollable" : "fullWidth"}
           scrollButtons="auto"
           allowScrollButtonsMobile
           sx={{
             boxShadow: shadows.shadowWhite3,
+            display: "flex",
+            justifyContent: "center",
           }}
           TabIndicatorProps={{ sx: { display: "none" } }}
-          
         >
-          <Tab sx={tabStyle} label="Education" value="Education" />
           <Tab
             sx={tabStyle}
             label="Professional Skill"
             value="Professional_Skill"
           />
           <Tab sx={tabStyle} label="Experience" value="Experience" />
-          <Tab sx={tabStyle} label="Interview" value="interview" />
         </Tabs>
       </Box>
 
       <Box sx={{ mt: 3 }}>
-        {value === "Education" && <InterviewTab />}
         {value === "Professional_Skill" && (
           <Container maxWidth="lg">
             <Grid container spacing={4}>
-              <SkillSection title="Design Skill" skills={designSkill} />
-              <SkillSection
-                title="Development Skill"
-                skills={developmentSkill}
-              />
+              <SkillSection skills={developmentSkill} />
             </Grid>
           </Container>
         )}
 
         {value === "Experience" && <InterviewTab />}
-        {value === "interview" && <InterviewTab />}
       </Box>
     </Container>
   );
 };
 
 export default MyResume;
+
 const tabStyle = {
   border: "none",
-  paddingY: "30px",
-  width: { xs: "100%", sm: "25%" },
+  py: { xs: "15px", sm: "20px", md: "30px" },
+  px: { xs: "10px", sm: "20px", md: "30px" },
   fontWeight: "bold",
   background: "transparent",
   whiteSpace: "nowrap",
@@ -104,6 +105,7 @@ const tabStyle = {
   transition: "all 0.3s ease",
   position: "relative",
   color: COLORS.bodyWhite,
+  fontSize: { xs: "12px", sm: "14px", md: "16px" },
   ":hover": {
     background: COLORS.gradients.gradientBoxW,
     color: COLORS.primary,

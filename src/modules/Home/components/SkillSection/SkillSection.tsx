@@ -1,6 +1,7 @@
 import { COLORS } from "@constants/color";
-
 import { Box, Grid, LinearProgress, Stack, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
 interface Skill {
   title: string;
@@ -9,52 +10,74 @@ interface Skill {
 
 interface SkillSectionProps {
   skills: Skill[];
-  title: string;
 }
 
-const SkillSection: React.FC<SkillSectionProps> = ({
-  skills,
-  title,
-}: SkillSectionProps) => {
+const SkillSection: React.FC<SkillSectionProps> = ({ skills }) => {
+  const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true });
+  const [progress, setProgress] = useState(skills.map(() => 0));
+
+  useEffect(() => {
+    if (inView) {
+      const timeout = setTimeout(() => {
+        setProgress(skills.map((skill) => skill.value));
+      }, 200);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [inView, skills]);
 
   return (
-    <Grid item sm={6} xs={12} sx={{ mb: "20px" }}>
-      <Stack sx={{ gap: "15px", mb: "20px" }}>
+    <Box ref={ref} sx={{ mb: "20px" }}>
+      <Stack sx={{ gap: "15px", my: "30px", p: 2 }}>
         <Typography
           variant="body2"
-          sx={{ letterSpacing: "2px", fontWeight: 500, color: COLORS.subtitle }}
-    
+          sx={{
+            letterSpacing: "2px",
+            fontWeight: 500,
+            color: COLORS.subtitle,
+            fontSize: { xs: "12px", sm: "14px", md: "16px" },
+          }}
         >
           Features
         </Typography>
         <Typography
           variant="h2"
-          sx={{ color: COLORS.bodyWhite, fontSize: "36px", fontWeight: "700" }}
-      
+          sx={{
+            color: COLORS.bodyWhite,
+            fontWeight: "700",
+            fontSize: { xs: "24px", sm: "28px", md: "36px", lg: "40px" },
+          }}
         >
-          {title}
+          Development Skill
         </Typography>
       </Stack>
 
-      {skills.map((skill, index) => (
-        <div
-        key={index}
-   
-        >
-          <Box mb={2} key={index}>
-            <Typography variant="body2" sx={{ mb: "10px" }} 
-            >
-              {skill.title}
-            </Typography>
-            <LinearProgress
-              variant="determinate"
-              value={skill.value}
-              sx={LinearProgressStyles}
-            />
-          </Box>
-        </div>
-      ))}
-    </Grid>
+      <Grid container spacing={4} p={2}>
+        {skills.map((skill, index) => (
+          <Grid item xs={12} sm={6}  key={index}>
+            <Box mb={2}>
+              <Typography
+                variant="body2"
+                sx={{
+                  mb: "10px",
+                  fontSize: { xs: "12px", sm: "14px", md: "16px" },
+                }}
+              >
+                {skill.title}
+              </Typography>
+              <LinearProgress
+                variant="determinate"
+                value={progress[index]}
+                sx={{
+                  ...LinearProgressStyles,
+                  transition: "all 1.5s ease-in-out",
+                }}
+              />
+            </Box>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
   );
 };
 

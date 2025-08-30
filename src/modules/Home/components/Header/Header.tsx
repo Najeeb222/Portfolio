@@ -2,6 +2,27 @@ import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import AnimatedText from "../AnimatedText/AnimatedText";
 import { FindWithMe, CardWrapper } from "@components/index";
 import { COLORS } from "@constants/color";
+import { motion } from "framer-motion";
+
+// Text animations - now sliding from LEFT
+const textVariant = {
+  hidden: { opacity: 0, x: -50 },
+  visible: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: { delay: i * 0.2, duration: 0.6, ease: "easeOut" },
+  }),
+};
+
+// Social icons fade-in
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
 
 const Header = () => {
   return (
@@ -10,48 +31,43 @@ const Header = () => {
       component="section"
       maxWidth="lg"
       disableGutters
-      sx={{ p: { md: 3, xs: "5px" }, mt: "80px" }}
+      sx={{ p: { md: 3, xs: "5px" }, mt: "90px" ,}}
     >
       <Grid container spacing={4} alignItems="center">
-        {/* RIGHT SIDE (Profile Image + CardWrapper) on small screens first */}
+        {/* ==== IMAGE SECTION (CardWrapper height 70%) ==== */}
         <Grid
           item
           xs={12}
           md={5}
           sx={{ position: "relative", order: { xs: 1, md: 2 } }}
         >
-          {/* CardWrapper behind image */}
-          <Box
-            sx={{
-              position: "absolute",
-              bottom: 0,
-              left: "50%",
-              transform: "translateX(-50%)",
-              zIndex: 1,
-              width: "100%",
-              height: "75%",
-            }}
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            whileHover={{ scale: 1.03, rotate: 1.5 }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
+            viewport={{ once: true }}
           >
-            <CardWrapper height="100%" width="100%" />
-          </Box>
-
-
-          <Box
-            component="img"
-            src="assets/images/MyProfile.png"
-            alt="Najeeb Ullah"
-            sx={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              borderRadius: "12px",
-              position: "relative",
-              zIndex: 2,
-            }}
-          />
+            <CardWrapper width="100%" height="70%">
+              {/* Clip image to wrapper radius */}
+              <Box sx={{ borderRadius: "inherit", overflow: "hidden" }}>
+                <Box
+                  component="img"
+                  src="assets/images/headerImg.png"
+                  alt="Najeeb Ullah"
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                  }}
+                />
+              </Box>
+            </CardWrapper>
+          </motion.div>
         </Grid>
 
-
+        {/* ==== TEXT SECTION ==== */}
         <Grid
           item
           xs={12}
@@ -64,52 +80,81 @@ const Header = () => {
           }}
         >
           <Stack gap="20px">
-            <Typography
-              variant="body2"
-              sx={{
-                letterSpacing: { md: "3px", sm: "2px", xs: "1px" },
-                textTransform: "uppercase",
-                // color: COLORS.primary,
-                fontWeight: 500,
-                fontSize: { xs: "12px", sm: "14px", md: "16px" },
-              }}
+            <motion.div
+              variants={textVariant}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0}
             >
-              Welcome to my world
-            </Typography>
+              <Typography
+                variant="body2"
+                sx={{
+                  letterSpacing: { md: "3px", sm: "2px", xs: "1px" },
+                  textTransform: "uppercase",
+                  fontWeight: 500,
+                  fontSize: { xs: "12px", sm: "14px", md: "16px" },
+                }}
+              >
+                Welcome to my world
+              </Typography>
+            </motion.div>
 
-
-            <AnimatedText />
-
-
-            <Typography
-              color={COLORS.bodyWhite}
-              variant="body1"
-              pr={{ md: "135px", xs: 0 }}
-              sx={{
-                lineHeight: 1.8,
-                fontSize: { xs: "14px", sm: "16px", md: "18px" },
-              }}
+            <motion.div
+              variants={textVariant}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={1}
             >
-              I’m a passionate web developer specializing in{" "}
-              <strong style={{ color: COLORS.primary }}>
-                modern, user-friendly applications
-              </strong>{" "}
-              with clean code and creative solutions.
-            </Typography>
+              <AnimatedText />
+            </motion.div>
+
+            <motion.div
+              variants={textVariant}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={2}
+            >
+              <Typography
+                color={COLORS.bodyWhite}
+                variant="body1"
+                pr={{ md: "135px", xs: 0 }}
+                sx={{
+                  lineHeight: 1.8,
+                  fontSize: { xs: "14px", sm: "16px", md: "18px" },
+                }}
+              >
+                I’m a passionate web developer specializing in{" "}
+                <strong style={{ color: COLORS.primary }}>
+                  modern, user-friendly applications
+                </strong>{" "}
+                with clean code and creative solutions.
+              </Typography>
+            </motion.div>
           </Stack>
 
           {/* Social Icons */}
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: { xs: "column", sm: "row" },
-              gap: "20px",
-              justifyContent: "space-between",
-              mt: 2,
-            }}
+          <motion.div
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ delay: 0.6 }}
           >
-            <FindWithMe />
-          </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: { xs: "column", sm: "row" },
+                gap: "20px",
+                justifyContent: "space-between",
+                mt: 2,
+              }}
+            >
+              <FindWithMe />
+            </Box>
+          </motion.div>
         </Grid>
       </Grid>
     </Container>

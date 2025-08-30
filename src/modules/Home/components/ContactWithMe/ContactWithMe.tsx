@@ -50,11 +50,12 @@ const ContactWithMe = () => {
             >
               <Box
                 component={"img"}
-                src="/assets/images/portfolio_1.jpg"
+                src="/assets/images/headerImg.png"
                 sx={{
                   width: "100%",
-                  height: "auto",
+                  height: "300px",
                   objectFit: "cover",
+                  objectPosition:'center top',
                   ":hover": { transform: "scale(1.1)" },
                   transition: ".4s",
                 }}
@@ -69,18 +70,17 @@ const ContactWithMe = () => {
                   fontWeight: 700,
                 }}
               >
-                Nevine Acotanza
+                Najeeb Ullah
               </Typography>
-              <Typography sx={textStyle}>Chief Operating Officer</Typography>
+              <Typography sx={textStyle}>Front end Web developer</Typography>
               <Typography sx={textStyle}>
-                I am available for freelance work. Connect with me via and call
-                in to my account.
-              </Typography>
-              <Typography sx={textStyle}>
-                Phone: <span> +01234567890</span>
+                Available for freelance opportunities. Let’s connect and build something amazing.
               </Typography>
               <Typography sx={textStyle}>
-                Email: <span> +01234567890</span>
+                Phone: <span> +923490302906</span>
+              </Typography>
+              <Typography sx={textStyle}>
+                Email: <span> Najeeb13750@gmail.com</span>
               </Typography>
               <FindWithMe />
             </Stack>
@@ -95,7 +95,7 @@ const ContactWithMe = () => {
               <Box width="100%">
                 <InputLabel
                   sx={{
-                    mb: {md:3,sm:2,xs:1.5},
+                    mb: { md: 3, sm: 2, xs: 1.5 },
                     fontSize: { md: "16px", sm: "14px", xs: "12px" },
                   }}
                 >
@@ -106,7 +106,7 @@ const ContactWithMe = () => {
               <Box width="100%">
                 <InputLabel
                   sx={{
-                    mb: {md:3,sm:2,xs:1.5},
+                    mb: { md: 3, sm: 2, xs: 1.5 },
                     fontSize: { md: "16px", sm: "14px", xs: "12px" },
                   }}
                 >

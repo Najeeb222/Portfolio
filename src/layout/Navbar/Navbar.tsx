@@ -55,106 +55,103 @@ export default function Navbar(props: any) {
     setActive(path);
   };
 
-const drawer = (
-  <Box
-    padding={"10px"}
-    justifyContent={"center"}
-    height={"100%"}
-    onClick={handleDrawerToggle}
-    sx={{
-      textAlign: "center",
-      background: COLORS.gradients.gradientBoxW,
-    }}
-  >
-    <List>
-      <Stack gap={"25px"}>
-        <Stack
-          direction={"row"}
-          justifyContent={"space-between"}
-          alignItems={"center"}
-          gap={"20px"}
-        >
-          <Box
-            component={"img"}
-            src="/assets/images/logo.png"
-            alt="logo"
-            width={"100px"}
-            height={"100px"}
-            sx={{ borderRadius: "50%", objectFit: "cover" }}
-          />
-          <CustomButton width={"auto"} height={"50px"} icon={<Close />} />
-        </Stack>
-        <Typography color={COLORS.bodyWhite} textAlign={"start"}>
-          Inbio is a personal portfolio
-          <br /> template. You can customize all.
-        </Typography>
-        <Divider />
-      </Stack>
-
-      {/* 🔹 Mobile Nav */}
-   {/* 🔹 Mobile Nav */}
-{navItems.map((item) => (
-  <ListItem key={item.title} disablePadding>
-    <a
-      href={item.path}
-      onClick={() => handleNavClick(item.path)}
-      style={{
-        textDecoration: "none",
-        width: "100%",
-        padding: "10px 0px",
-        display: "block",
+  const drawer = (
+    <Box
+      padding={"10px"}
+      justifyContent={"center"}
+      height={"100%"}
+      onClick={handleDrawerToggle}
+      sx={{
+        textAlign: "center",
+        background: COLORS.gradients.gradientBoxW,
       }}
     >
-      <Typography
-        sx={{
-          color: COLORS.bodyWhite,
-          fontSize: "14px",
-          fontWeight: 600,
-          textAlign: "start",
-          position: "relative",
-          paddingBottom: "5px",
-          fontFamily: "Montserrat, sans-serif",
-          "&::after": {
-            content: '""',
-            position: "absolute",
-            bottom: 0,
-            left: "0",
-            width: active === item.path ? "100%" : "0%",
-            height: "2px",
-            backgroundColor: COLORS.primary,
-            transition: "width 0.3s ease-in-out",
-          },
-          "&:hover::after": {
-            width: "100%",
-          },
-        }}
-      >
-        {item.title}
-      </Typography>
-    </a>
-  </ListItem>
-))}
+      <List>
+        <Stack gap={"25px"}>
+          <Stack
+            direction={"row"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+            gap={"20px"}
+          >
+            <Box
+              component={"img"}
+              src="/assets/images/myImg.png"
+              alt="logo"
+              width={"100px"}
+              height={"100px"}
+              sx={{ borderRadius: "50%", objectFit: "cover", border: `1px solid ${COLORS.danger}` }}
+            />
+            <CustomButton width={"auto"} height={"50px"} hover={true} icon={<Close />} />
+          </Stack>
+          <Typography color={COLORS.bodyWhite} textAlign={"start"}>
+            Available for freelance — let's create something impactful together.          </Typography>
+          <Divider />
+        </Stack>
+
+      
+        {navItems.map((item) => (
+          <ListItem key={item.title} disablePadding>
+            <a
+              href={item.path}
+              onClick={() => handleNavClick(item.path)}
+              style={{
+                textDecoration: "none",
+                width: "100%",
+                padding: "10px 0px",
+                display: "block",
+              }}
+            >
+              <Typography
+                sx={{
+                  color: COLORS.bodyWhite,
+                  fontSize: "14px",
+                  fontWeight: 600,
+                  textAlign: "start",
+                  position: "relative",
+                  paddingBottom: "5px",
+                  fontFamily: "Montserrat, sans-serif",
+                  "&::after": {
+                    content: '""',
+                    position: "absolute",
+                    bottom: 0,
+                    left: "0",
+                    width: active === item.path ? "100%" : "0%",
+                    height: "2px",
+                    backgroundColor: COLORS.primary,
+                    transition: "width 0.3s ease-in-out",
+                  },
+                  "&:hover::after": {
+                    width: "100%",
+                  },
+                }}
+              >
+                {item.title}
+              </Typography>
+            </a>
+          </ListItem>
+        ))}
 
 
-      {/* 🔹 Add Resume Button on Mobile */}
-      <Box mt={"30px"}>
-        <CustomButton
-          title="Download Resume"
-          fontsize="14px"
-          height={"50px"}
-          width="100%"
-          hover
-          downloadLink="/assets/files/NajeebResume.pdf"
-          fileName="Najeeb_Ullah_Resume.pdf"
-        />
-      </Box>
+        
+        <Box mt={"30px"}>
+          <CustomButton
+            title="Download Resume"
+            fontsize="14px"
+            height={"50px"}
+            width="100%"
+            hover
+            downloadLink="/assets/files/NajeebResume.pdf"
+            fileName="Najeeb_Ullah_Resume.pdf"
+          />
+        </Box>
 
-      <Box mt={"40px"}>
-        <FindWithMe />
-      </Box>
-    </List>
-  </Box>
-);
+        <Box mt={"40px"}>
+          <FindWithMe />
+        </Box>
+      </List>
+    </Box>
+  );
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -164,6 +161,7 @@ const drawer = (
       <AppBar
         component="nav"
         position="fixed"
+        
         sx={{
           backgroundColor: isScrolled ? "#ecf0f3" : "transparent",
           paddingY: 2,
@@ -185,11 +183,11 @@ const drawer = (
             >
               <Box
                 component={"img"}
-                src="/assets/images/logo.png"
+                src="/assets/images/myImg.png"
                 alt="Logo"
                 width={"100%"}
                 height={"100%"}
-                sx={{ height: "62px", width: "139px", objectFit: "cover" }}
+                sx={{ height: "70px", width: "70px", objectFit: "cover", borderRadius: '50%', border: `1px solid ${COLORS.danger}` }}
               />
 
               {/* 🔹 Desktop Nav */}
@@ -238,15 +236,15 @@ const drawer = (
                   </a>
                 ))}
                 <Box ml={"20px"}>
-                <CustomButton
-  title="Download Resume"
-  fontsize="16px"
-  height={'55px'}
-  width="200px"
-  hover
-  downloadLink="/assets/files/NajeebResume.pdf" 
-  fileName="Najeeb_Ullah_Resume.pdf"
-/>
+                  <CustomButton
+                    title="Download Resume"
+                    fontsize="16px"
+                    height={'55px'}
+                    width="200px"
+                    hover
+                    downloadLink="/assets/files/NajeebResume.pdf"
+                    fileName="Najeeb_Ullah_Resume.pdf"
+                  />
 
                 </Box>
               </Box>

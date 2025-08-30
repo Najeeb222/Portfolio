@@ -9,3 +9,4 @@ export { default as MyResume } from "./MyResume/MyResume";
 // export { default as MyBlog } from "./MyBlog/MyBlog";
 export { default as ContactWithMe } from "./ContactWithMe/ContactWithMe";
 
+export { default as PortfolioLoader } from "./PortfolioLoader/PortfolioLoader";

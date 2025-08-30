@@ -1,17 +1,18 @@
 import { CardWrapper } from "@components/index";
 import { COLORS } from "@constants/color";
-
-import {
- 
-  DesktopWindows,
-
-  WifiOutlined,
-  SpaOutlined,
-  Storage, 
-  Layers,
-  DesignServices,  
-} from "@mui/icons-material";
+import { DesktopWindows, WifiOutlined, SpaOutlined, Storage, Layers, DesignServices } from "@mui/icons-material";
 import { Container, Grid, Stack, Typography } from "@mui/material";
+import { motion } from "framer-motion";
+
+const cardVariant = {
+  hidden: { y: 50, opacity: 0 },
+  visible: (i: number) => ({
+    y: 0,
+    opacity: 1,
+    transition: { delay: i * 0.2, duration: 0.6, ease: "easeOut" },
+  }),
+  hover: { scale: 1.05, transition: { type: "spring", stiffness: 200 } },
+};
 
 const Features = () => {
   return (
@@ -24,7 +25,8 @@ const Features = () => {
             letterSpacing: "2px",
             color: COLORS.subtitle,
             mb: "16px",
-          }} >
+          }}
+        >
           FEATURES
         </Typography>
         <Typography
@@ -39,26 +41,32 @@ const Features = () => {
           What I Do
         </Typography>
       </Stack>
+
       <Grid container spacing={3}>
-        {FeaturesComponentData.map((item) => (
+        {FeaturesComponentData.map((item, index) => (
           <Grid item md={4} sm={6} xs={12} key={item.title}>
-            <Stack direction={"row"} gap={"20px"}>
-              <div>
-                <CardWrapper
-                  isArrow
-                  topIcon={item.icon}
-                  width={"auto"}
-                  height={"auto"}
-                  hover
-                  p={{ md: "40px 50px", xs: "20px" }}
-                >
-                  <Typography variant="h4" fontSize={"24px"}>
-                    {item.title}
-                  </Typography>
-                  <Typography>{item.description}</Typography>
-                </CardWrapper>
-              </div>
-            </Stack>
+            <motion.div
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={cardVariant}
+              whileHover="hover"
+            >
+              <CardWrapper
+                isArrow
+                topIcon={item.icon}
+                width={"auto"}
+                height={"auto"}
+                hover
+                p={{ md: "40px 50px", xs: "20px" }}
+              >
+                <Typography variant="h4" fontSize={"24px"} sx={{ mb: 1 }}>
+                  {item.title}
+                </Typography>
+                <Typography>{item.description}</Typography>
+              </CardWrapper>
+            </motion.div>
           </Grid>
         ))}
       </Grid>
@@ -76,39 +84,32 @@ const iconStyles = {
 const FeaturesComponentData = [
   {
     title: "Web Development",
-    description:
-      "Creating fast, responsive, and scalable websites using React, Next.js, and modern web technologies.",
-    icon: <DesktopWindows sx={iconStyles} />, // ✅ replaced
+    description: "Creating fast, responsive, and scalable websites using React, Next.js, and modern web technologies.",
+    icon: <DesktopWindows sx={iconStyles} />,
   },
   {
     title: "Full-Stack Development",
-    description:
-      "Building robust full-stack applications with clean architecture and optimized performance across the stack.",
+    description: "Building robust full-stack applications with clean architecture and optimized performance across the stack.",
     icon: <Layers sx={iconStyles} />,
   },
   {
     title: "UI/UX Design",
-    description:
-      "Designing intuitive, user-centered interfaces that balance aesthetics with functionality and accessibility.",
-    icon: <DesignServices sx={iconStyles} />, // ✅ new icon
+    description: "Designing intuitive, user-centered interfaces that balance aesthetics with functionality and accessibility.",
+    icon: <DesignServices sx={iconStyles} />,
   },
   {
     title: "Backend & Firebase",
-    description:
-      "Developing secure, reliable backends with Firebase for authentication, databases, and real-time features.",
+    description: "Developing secure, reliable backends with Firebase for authentication, databases, and real-time features.",
     icon: <Storage sx={iconStyles} />,
   },
   {
     title: "API Integration",
-    description:
-      "Seamlessly integrating REST APIs to connect applications with external services and data sources.",
+    description: "Seamlessly integrating REST APIs to connect applications with external services and data sources.",
     icon: <WifiOutlined sx={iconStyles} />,
   },
   {
     title: "Personal Branding & Portfolio",
-    description:
-      "Creating professional portfolio websites that highlight skills, achievements, and personal branding.",
+    description: "Creating professional portfolio websites that highlight skills, achievements, and personal branding.",
     icon: <SpaOutlined sx={iconStyles} />,
   },
 ];
-
