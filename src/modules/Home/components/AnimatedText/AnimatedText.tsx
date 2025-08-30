@@ -7,14 +7,34 @@ const AnimatedText = () => {
     <Typography
       variant="h1"
       sx={{
-        fontSize: { xs: "28px", sm: "40px", md: "50px" },
+        fontSize: { xs: "24px", sm: "32px", md: "50px" },
         fontWeight: 700,
         lineHeight: 1.2,
+        textAlign: { xs: "center", md: "left" }, // optional alignment
       }}
     >
-      Hi, I’m <span style={{ color: COLORS.primary }}>Najeeb Ullah</span>
+      Hi, I’m{" "}
+      <Typography
+        component="span"
+        sx={{
+          color: COLORS.primary,
+          fontSize: { xs: "24px", sm: "32px", md: "50px" },
+          fontWeight: 700,
+        }}
+      >
+        Najeeb Ullah
+      </Typography>
       <br />
-      <span style={{ color: COLORS.primary }}>a </span>
+      <Typography
+        component="span"
+        sx={{
+          color: COLORS.primary,
+          fontSize: { xs: "24px", sm: "32px", md: "50px" },
+          fontWeight: 700,
+        }}
+      >
+        a{" "}
+      </Typography>
       <TypeAnimation
         sequence={[
           "Developer.",
@@ -28,7 +48,12 @@ const AnimatedText = () => {
         speed={60}
         deletionSpeed={70}
         repeat={Infinity}
-        style={{ display: "inline-block" }}
+        style={{
+          display: "inline-block",
+          fontSize: "inherit", // inherit font size from parent for responsiveness
+          fontWeight: 700,
+          color: COLORS.primary,
+        }}
       />
     </Typography>
   );
