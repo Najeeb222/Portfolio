@@ -4,12 +4,12 @@ import { COLORS } from "@constants/color";
 import {
  
   DesktopWindows,
-  LiveTv,
+
   WifiOutlined,
   SpaOutlined,
-  Storage, // ✅ for backend/Firebase
+  Storage, 
   Layers,
-  DesignServices,  // ✅ Stack icon
+  DesignServices,  
 } from "@mui/icons-material";
 import { Container, Grid, Stack, Typography } from "@mui/material";
 

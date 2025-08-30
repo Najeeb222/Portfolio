@@ -1,4 +1,4 @@
-import { CustomCard } from "@components/index";
+// import { CustomCard } from "@components/index";
 import { COLORS } from "@constants/color";
 import { Container, Grid, Stack, Typography } from "@mui/material";
 
@@ -27,7 +27,7 @@ const MyBlog = () => {
       <Grid container spacing={3}>
         {[1, 2, 3].map((item) => (
           <Grid item key={item} md={4} sm={6} xs={12}>
-            <CustomCard time={true} />
+            {/* <CustomCard time={true} /> */}
           </Grid>
         ))}
       </Grid>

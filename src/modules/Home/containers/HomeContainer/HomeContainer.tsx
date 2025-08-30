@@ -1,14 +1,14 @@
 import { AppLayout } from "@layouts/index";
 import {
-  Client,
+  // Client,
   ContactWithMe,
   Features,
   Header,
-  MyBlog,
+  // MyBlog,
   MyPortfolio,
   MyResume,
-  Pricing,
-  Testimonial,
+  // Pricing,
+  // Testimonial,
 } from "@modules/Home/components";
 import { Divider, Stack } from "@mui/material";
 const HomeContainer = () => {

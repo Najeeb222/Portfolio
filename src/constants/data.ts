@@ -1,4 +1,4 @@
-import { PortfolioItem } from "src/types";
+
 
 export const designSkill = [
   { title: "PHOTOSHOP", value: 100 },
@@ -28,42 +28,42 @@ export const portfolioData = [
   {
     id: 1,
     category: "DEVELOPMENT",
-    title: "E-Commerce Website",
+    title: "E-Commerce Admin Dashboard",
     image: "/assets/images/dashboard.jpg",
     link: "https://e-commerce-admin-lovat.vercel.app/",
   },
   {
     id: 2,
-    category: "Chating",
-    title: "Dashboard Design",
+    category: "CHAT APPLICATION",
+    title: "Real-Time Chat App",
     image: "/assets/images/chating.jpg",
     link: "https://chat-a-pp-xi.vercel.app",
   },
   {
     id: 3,
-    category: "PORTFOLIO",
-    title: "Personal Branding Website",
-    image: "/assets/images/portfolio_1.jpg",
-    link: "https://your-portfolio.com",
+    category: "AUTHENTICATION",
+    title: "Login & Authentication System",
+    image: "/assets/images/auth.jpg",
+    link: "https://auth-ten-chi.vercel.app/login",
   },
   {
     id: 4,
-    category: "PORTFOLIO",
-    title: "Personal Branding Website",
+    category: "LEARNING PLATFORM",
+    title: "Soofiy.io Portfolio",
     image: "/assets/images/soofy.jpg",
     link: "https://soofiy-io-pi.vercel.app",
   },
   {
     id: 5,
-    category: "PORTFOLIO",
-    title: "Personal Branding Website",
+    category: "BUSINESS SOLUTION",
+    title: "Nexzon Shipping Platform",
     image: "/assets/images/shipping.png",
     link: "https://nexzon-shipping.vercel.app/",
   },
   {
     id: 6,
-    category: "PORTFOLIO",
-    title: "Personal Branding Website",
+    category: "SOCIAL PLATFORM",
+    title: "Single Muslim Dating App",
     image: "/assets/images/dating.jpg",
     link: "https://single-muslim.vercel.app/",
   },

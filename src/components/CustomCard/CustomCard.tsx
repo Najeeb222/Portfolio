@@ -1,22 +1,17 @@
 import { COLORS } from "@constants/color";
 import { shadows } from "@constants/shadow";
-import {
-  AccessTimeOutlined,
-  CallMadeOutlined,
-  FavoriteBorder,
-} from "@mui/icons-material";
-import { Box, Card, CardContent, Icon, Stack, Typography } from "@mui/material";
+
+import { Box, Card, CardContent,  Stack, Typography } from "@mui/material";
 
 type Props = {
   image: string;
   category: string;
   title: string;
   link: string; // ✅ new
-  favorites?: boolean;
-  time?: boolean;
+
 };
 
-const CustomCard = ({ image, category, title, link, favorites, time }: Props) => {
+const CustomCard = ({ image, category, title, link, }: Props) => {
   return (
     <a href={link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
       <Card
@@ -49,6 +44,7 @@ const CustomCard = ({ image, category, title, link, favorites, time }: Props) =>
               width: "100%",
               height: "250px",
               objectFit: "cover",
+              objectPosition: 'top',
               transition: "transform 0.4s ease",
               "&:hover": {
                 transform: "scale(1.05)",
@@ -71,18 +67,22 @@ const CustomCard = ({ image, category, title, link, favorites, time }: Props) =>
             </Typography>
           </Stack>
 
-          <Typography
-            variant="h4"
-            sx={{
-              fontSize: { md: "23px", xs: "20px" },
-              fontWeight: 600,
-              color: COLORS.headingWv,
-              transition: "color 0.4s ease",
-              "&:hover": { color: COLORS.primary },
-            }}
-          >
-            {title}
-          </Typography>
+ <Typography
+  variant="h4"
+  sx={{
+    fontSize: { md: "23px", xs: "20px" },
+    fontWeight: 600,
+    color: COLORS.headingWv,
+    transition: "color 0.4s ease",
+    "&:hover": { color: COLORS.primary },
+    minHeight: "60px", // ✅ ensures consistent height
+    display: "flex",
+    alignItems: "center",
+  }}
+>
+  {title}
+</Typography>
+
         </CardContent>
       </Card>
     </a>
