@@ -13,12 +13,12 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useGsapAnimation } from "@hooks/UseGsapAnimation";
+
 
 const Testimonial = () => {
   const sliderRef = useRef<Slider | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const {elementsRef,textRef}=useGsapAnimation()
+
 
   const settings = {
     dots: true,
@@ -62,7 +62,7 @@ const Testimonial = () => {
     <Container disableGutters>
       <Slider ref={sliderRef} {...settings}>
         {[1, 2, 3, 4, 5].map((_item, index) => (
-                   <div ref={(el) => { elementsRef.current[index] = el; }}>
+                   <Box>
 
                    
           <div key={index}>
@@ -74,9 +74,7 @@ const Testimonial = () => {
                   fontWeight: 500,
                   color: COLORS.subtitle,
                 }}
-                ref={(el) => {
-                  textRef.current[0] = el;
-                }}
+         
               >
                 What Clients Say
               </Typography>
@@ -88,15 +86,13 @@ const Testimonial = () => {
                   fontSize: { md: "60px", xs: "34px", sm: "40px" },
                   color: COLORS.bodyWhite,
                 }}
-                ref={(el) => {
-                  textRef.current[1] = el;
-                }}
+             
               >
 
                 Testimonial
               </Typography>
             </Stack>
-            <div ref={(el) => { elementsRef.current[index] = el; }}>
+            <div >
             <Grid container gap={5} sx={{ mx: "auto" }}>
               <Grid item md={4} xs={12}>
                 <CardWrapper width={"100%"} height={"auto"}>
@@ -237,7 +233,7 @@ const Testimonial = () => {
             </Grid>
             </div>
           </div>
-          </div>
+          </Box>
         ))}
       </Slider>
     </Container>

@@ -1,107 +1,114 @@
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import AnimatedText from "../AnimatedText/AnimatedText";
-import { CardWrapper, CustomButton, FindWithMe } from "@components/index";
+import { FindWithMe, CardWrapper } from "@components/index";
 import { COLORS } from "@constants/color";
 
 const Header = () => {
   return (
-    <Container component={"section"} maxWidth="lg" disableGutters  sx={{ p: {md:3,xs:'5px'},mt:'80px', }}>
-      <Grid container mt={2} display={'flex'} spacing={4}>
+    <Container
+      id="home"
+      component="section"
+      maxWidth="lg"
+      disableGutters
+      sx={{ p: { md: 3, xs: "5px" }, mt: "80px" }}
+    >
+      <Grid container spacing={4} alignItems="center">
+        {/* RIGHT SIDE (Profile Image + CardWrapper) on small screens first */}
+        <Grid
+          item
+          xs={12}
+          md={5}
+          sx={{ position: "relative", order: { xs: 1, md: 2 } }}
+        >
+          {/* CardWrapper behind image */}
+          <Box
+            sx={{
+              position: "absolute",
+              bottom: 0,
+              left: "50%",
+              transform: "translateX(-50%)",
+              zIndex: 1,
+              width: "100%",
+              height: "75%",
+            }}
+          >
+            <CardWrapper height="100%" width="100%" />
+          </Box>
+
+
+          <Box
+            component="img"
+            src="assets/images/MyProfile.png"
+            alt="Najeeb Ullah"
+            sx={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              borderRadius: "12px",
+              position: "relative",
+              zIndex: 2,
+            }}
+          />
+        </Grid>
+
+
         <Grid
           item
           xs={12}
           md={7}
           sx={{
             display: "flex",
-            justifyContent: "space-around",
             flexDirection: "column",
-            gap:'20px'
+            gap: "20px",
+            order: { xs: 2, md: 1 },
           }}
-          
-
         >
-          <Stack gap={"20px"}>
+          <Stack gap="20px">
             <Typography
               variant="body2"
-              sx={{ letterSpacing: {md:'3px',sm:'2px',xs:'1px'}, textTransform: "uppercase" }}
+              sx={{
+                letterSpacing: { md: "3px", sm: "2px", xs: "1px" },
+                textTransform: "uppercase",
+                // color: COLORS.primary,
+                fontWeight: 500,
+                fontSize: { xs: "12px", sm: "14px", md: "16px" },
+              }}
             >
               Welcome to my world
             </Typography>
+
+
             <AnimatedText />
-            <Typography color={COLORS.bodyWhite} variant="body1" pr={{md:'135px',xs:0}}>
-              I use animation as a third dimension by which to simplify
-              experiences and kuiding thro each and every interaction. I’m not
-              adding motion just to spruce things up, but doing it in ways that.
+
+
+            <Typography
+              color={COLORS.bodyWhite}
+              variant="body1"
+              pr={{ md: "135px", xs: 0 }}
+              sx={{
+                lineHeight: 1.8,
+                fontSize: { xs: "14px", sm: "16px", md: "18px" },
+              }}
+            >
+              I’m a passionate web developer specializing in{" "}
+              <strong style={{ color: COLORS.primary }}>
+                modern, user-friendly applications
+              </strong>{" "}
+              with clean code and creative solutions.
             </Typography>
           </Stack>
-          <Box sx={{justifyContent:'space-between',display:'flex',flexDirection:{xs:'column',sm:'row',gap:'20px'}}} >
-            <FindWithMe />
-            <Stack gap={"20px"}  width={"50%"}>
-              <Typography
-                variant="body2"
-                sx={{ fontWeight: "500", letterSpacing: "2px" }}
-              >
-                BEST SKILL ON
-              </Typography>
-              <Stack direction={"row"} gap={"10px"}>
-                <CustomButton
-                  icon={
-                    <img
-                      src="assets/icons/in.png"
-                      width={"24px"}
-                      height={"24px"}
-                      style={{ objectFit: "cover" }}
-                    />
-                  }
-                />
-                <CustomButton
-                  icon={
-                    <img
-                      src="assets/icons/diamond.png"
-                      alt="Logo"
-                      width={"24px"}
-                      height={"24px"}
-                    />
-                  }
-                />
-                <CustomButton
-                  icon={
-                    <img
-                      src="assets/icons/figma.png"
-                      width={"24px"}
-                      height={"24px"}
-                    />
-                  }
-                />
-              </Stack>
-            </Stack>
-          </Box>
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          md={4}
-          position={"relative"}
-          sx={{ padding: 0, ml: "auto " }}
-        >
-          <Box
-            component={"img"}
-            src="assets/images/MyProfile.png"
-            sx={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-          />
-          <Box
-            sx={{
-              position: "absolute",
 
-              bottom: "0",
-              zIndex: -3333,
+          {/* Social Icons */}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "column", sm: "row" },
+              gap: "20px",
+              justifyContent: "space-between",
+              mt: 2,
             }}
           >
-            <CardWrapper height={{md:'350px',sm:'550px',xs:'400px'}} width={{md:'385px',sm:'600',xs:'300px'}} />
+            <FindWithMe />
           </Box>
         </Grid>
       </Grid>

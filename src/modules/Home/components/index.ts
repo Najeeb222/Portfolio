@@ -8,4 +8,4 @@ export { default as Pricing } from "./Pricing/Pricing";
 export { default as Testimonial } from "./Testimonial/Testimonial";
 export { default as MyBlog } from "./MyBlog/MyBlog";
 export { default as ContactWithMe } from "./ContactWithMe/ContactWithMe";
-export { default as Footer } from "./Footer/Footer";
+

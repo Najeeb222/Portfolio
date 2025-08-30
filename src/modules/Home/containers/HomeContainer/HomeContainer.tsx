@@ -3,7 +3,6 @@ import {
   Client,
   ContactWithMe,
   Features,
-  Footer,
   Header,
   MyBlog,
   MyPortfolio,
@@ -15,8 +14,9 @@ import { Divider, Stack } from "@mui/material";
 const HomeContainer = () => {
   return (
     <AppLayout>
-      <Stack gap={'100px'} px={{md:0,xs:'15px'}}>
+      <Stack gap={'100px'} px={{ md: 0, xs: '15px' }}>
         <Header />
+
         <Divider />
         <Features />
         <Divider />
@@ -24,17 +24,17 @@ const HomeContainer = () => {
         <Divider />
         <MyResume />
         <Divider />
-        <Testimonial />
-        <Divider />
-        <Client />
-        <Divider />
-        <Pricing />
-        <Divider />
-        <MyBlog />
+        {/* <Testimonial /> */}
+        {/* <Divider /> */}
+        {/* <Client /> */}
+        {/* <Divider /> */}
+        {/* <Pricing /> */}
+        {/* <Divider /> */}
+        {/* <MyBlog /> */}
         <Divider />
         <ContactWithMe />
         <Divider />
-        <Footer />
+
       </Stack>
     </AppLayout>
   );

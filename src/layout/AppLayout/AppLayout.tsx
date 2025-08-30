@@ -1,13 +1,14 @@
-import {  Container } from "@mui/material";
+import { Container } from "@mui/material";
 import * as React from "react";
-import { Navbar } from "..";
+import { Footer, Navbar } from "..";
 
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Container maxWidth={false} disableGutters sx={{ overflow: "hidden" }}>
-      <Navbar/>
+      <Navbar />
       {children}
+      <Footer />
     </Container>
   );
 };

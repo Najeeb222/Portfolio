@@ -13,7 +13,7 @@ import {
 
 const ContactWithMe = () => {
   return (
-    <Container maxWidth={"lg"} disableGutters>
+    <Container maxWidth={"lg"} disableGutters component={'section'} id="contact">
       <Stack sx={{ textAlign: "center", gap: "20px" }}>
         <Typography
           variant="body2"

@@ -8,91 +8,153 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import { NavLink } from "react-router-dom";
 import { Divider, Stack, Typography } from "@mui/material";
 import { useScroll, useMotionValueEvent } from "framer-motion";
 
 import { COLORS } from "@constants/color";
 import { CustomButton, FindWithMe } from "@components/index";
 import { Close } from "@mui/icons-material";
+import { navItems } from "@constants/data";
 
 const drawerWidth = 320;
-const navItems = [
-  { title: "HOME", path: "/" },
-  { title: "FEATURES", path: "/" },
-  { title: "PROTFOLIO", path: "/" },
-  { title: "RESUME", path: "/" },
-  { title: "CLENTS", path: "/" },
-  { title: "PRICING", path: "/" },
-  { title: "BLOGS", path: "/" },
-  { title: "CONTACT", path: "/" },
-];
+
+
 
 export default function Navbar(props: any) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isScrolled, setIsScrolled] = React.useState(false);
+  const [active, setActive] = React.useState("#home");
 
   const { scrollY } = useScroll();
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > 100) {
-      setIsScrolled(true);
-    } else {
-      setIsScrolled(false);
-    }
+  // ✅ Detect scroll
+  useMotionValueEvent(scrollY, "change", () => {
+    setIsScrolled(scrollY.get() > 100);
+
+    const scrollPos = window?.scrollY || document.documentElement.scrollTop;
+
+    navItems.forEach((item) => {
+      const section = document.querySelector(item.path) as HTMLElement;
+      if (section) {
+        const offsetTop = section.offsetTop - 120; // adjust navbar height
+        const offsetBottom = offsetTop + section.offsetHeight;
+
+        if (scrollPos >= offsetTop && scrollPos < offsetBottom) {
+          setActive(item.path); // update active section
+        }
+      }
+    });
   });
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
-  const drawer = (
-    <Box
-      
-  
-      padding={"10px"}
-      justifyContent={"center"}
-      height={"100%"}
-      onClick={handleDrawerToggle}
-      sx={{ textAlign: "center" ,background:COLORS.gradients.gradientBoxW,}}
-    >
-      <List>
-        <Stack gap={'25px'}>
-          <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'} gap={'20px'}>
-            <Box component={'img'} src="/assets/images/logosCircle.png" alt="logo" width={'70px'} height={'70px'}/>
-            <CustomButton width={'auto'} height={'50px'}   icon={<Close/>}/>
-          </Stack>
-          <Typography color={COLORS.bodyWhite} textAlign={'start'}>
+  const handleNavClick = (path: string) => {
+    setActive(path);
+  };
+
+const drawer = (
+  <Box
+    padding={"10px"}
+    justifyContent={"center"}
+    height={"100%"}
+    onClick={handleDrawerToggle}
+    sx={{
+      textAlign: "center",
+      background: COLORS.gradients.gradientBoxW,
+    }}
+  >
+    <List>
+      <Stack gap={"25px"}>
+        <Stack
+          direction={"row"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          gap={"20px"}
+        >
+          <Box
+            component={"img"}
+            src="/assets/images/logo.png"
+            alt="logo"
+            width={"100px"}
+            height={"100px"}
+            sx={{ borderRadius: "50%", objectFit: "cover" }}
+          />
+          <CustomButton width={"auto"} height={"50px"} icon={<Close />} />
+        </Stack>
+        <Typography color={COLORS.bodyWhite} textAlign={"start"}>
           Inbio is a personal portfolio
           <br /> template. You can customize all.
-          </Typography>
-          <Divider/>
-        </Stack>
-        {navItems.map((item) => (
-          <ListItem key={item.title} disablePadding >
-            <NavLink
-              to={item.path}
-              style={{
-                textDecoration: "none",
-                width: "100%",
-                color: COLORS.bodyWhite,
-                fontSize: "14px",
-                fontWeight: 600,
-                padding: "10px 0px",
-              }}
-            >
-              <ListItemText primary={item.title} />
-              
-            </NavLink>
-          </ListItem>
-        ))}
-       <Box mt={'40px'}>
-       <FindWithMe/>
-       </Box>
-      </List>
-    </Box>
-  );
+        </Typography>
+        <Divider />
+      </Stack>
+
+      {/* 🔹 Mobile Nav */}
+   {/* 🔹 Mobile Nav */}
+{navItems.map((item) => (
+  <ListItem key={item.title} disablePadding>
+    <a
+      href={item.path}
+      onClick={() => handleNavClick(item.path)}
+      style={{
+        textDecoration: "none",
+        width: "100%",
+        padding: "10px 0px",
+        display: "block",
+      }}
+    >
+      <Typography
+        sx={{
+          color: COLORS.bodyWhite,
+          fontSize: "14px",
+          fontWeight: 600,
+          textAlign: "start",
+          position: "relative",
+          paddingBottom: "5px",
+          fontFamily: "Montserrat, sans-serif",
+          "&::after": {
+            content: '""',
+            position: "absolute",
+            bottom: 0,
+            left: "0",
+            width: active === item.path ? "100%" : "0%",
+            height: "2px",
+            backgroundColor: COLORS.primary,
+            transition: "width 0.3s ease-in-out",
+          },
+          "&:hover::after": {
+            width: "100%",
+          },
+        }}
+      >
+        {item.title}
+      </Typography>
+    </a>
+  </ListItem>
+))}
+
+
+      {/* 🔹 Add Resume Button on Mobile */}
+      <Box mt={"30px"}>
+        <CustomButton
+          title="Download Resume"
+          fontsize="14px"
+          height={"50px"}
+          width="100%"
+          hover
+          downloadLink="/assets/files/NajeebResume.pdf"
+          fileName="Najeeb_Ullah_Resume.pdf"
+        />
+      </Box>
+
+      <Box mt={"40px"}>
+        <FindWithMe />
+      </Box>
+    </List>
+  </Box>
+);
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -108,7 +170,7 @@ export default function Navbar(props: any) {
           boxShadow: isScrolled
             ? "0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12)"
             : "none",
-          transition: " 0.3s ease", 
+          transition: "0.3s ease",
         }}
       >
         <Box>
@@ -130,41 +192,63 @@ export default function Navbar(props: any) {
                 sx={{ height: "62px", width: "139px", objectFit: "cover" }}
               />
 
+              {/* 🔹 Desktop Nav */}
               <Box
                 sx={{
                   display: { xs: "none", md: "flex", alignItems: "center" },
                 }}
               >
                 {navItems.map((item) => (
-                  <NavLink
-                    to={item.path}
+                  <a
+                    href={item.path}
                     key={item.title}
-                    style={{ textDecoration: "none" }}
+                    onClick={() => handleNavClick(item.path)}
+                    style={{
+                      textDecoration: "none",
+                      padding: "10px",
+                      position: "relative",
+                    }}
                   >
-                    <Stack
+                    <Typography
                       sx={{
-                        alignItems: "center",
-                        justifyContent: "space-evenly",
-                        padding: "10px",
+                        color: "black",
+                        fontSize: "13px",
+                        fontWeight: 600,
+                        position: "relative",
+                        paddingBottom: "5px",
+                        fontFamily: "Montserrat, sans-serif",
+                        "&::after": {
+                          content: '""',
+                          position: "absolute",
+                          bottom: 0,
+                          left: "50%",
+                          transform: "translateX(-50%)",
+                          width: active === item.path ? "100%" : "0%",
+                          height: "2px",
+                          backgroundColor: COLORS.primary,
+                          transition: "width 0.3s ease-in-out",
+                        },
+                        "&:hover::after": {
+                          width: "100%",
+                        },
                       }}
                     >
-                      <Typography
-                        sx={{
-                          color: "black",
-                          fontSize: "13px",
-                        }}
-                      >
-                        {item.title}
-                      </Typography>
-                    </Stack>
-                  </NavLink>
+                      {item.title}
+                    </Typography>
+                  </a>
                 ))}
+                <Box ml={"20px"}>
                 <CustomButton
-                  title={"BUY NOW"}
-                  width={"98px"}
-                  height={"55px"}
-                  hover={true}
-                />
+  title="Download Resume"
+  fontsize="16px"
+  height={'55px'}
+  width="200px"
+  hover
+  downloadLink="/assets/files/NajeebResume.pdf" 
+  fileName="Najeeb_Ullah_Resume.pdf"
+/>
+
+                </Box>
               </Box>
             </Box>
             <IconButton
@@ -178,6 +262,8 @@ export default function Navbar(props: any) {
           </Toolbar>
         </Box>
       </AppBar>
+
+      {/* 🔹 Drawer (Mobile) */}
       <nav>
         <Drawer
           container={container}
@@ -190,7 +276,7 @@ export default function Navbar(props: any) {
           }}
           sx={{
             bgcolor: "transparent",
-            display: { xs: "block",  md: "none" },
+            display: { xs: "block", md: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,

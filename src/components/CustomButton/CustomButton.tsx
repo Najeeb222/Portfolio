@@ -8,8 +8,10 @@ type Props = {
   title?: string | number;
   fontsize?: string | number;
   hover?: boolean;
-  icon?: React.ReactNode |string;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>,
+  icon?: React.ReactNode | string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  downloadLink?: string; // 🔥 File URL
+  fileName?: string; // 🔥 Downloaded file name
 };
 
 const CustomButton = ({
@@ -19,11 +21,16 @@ const CustomButton = ({
   title,
   icon,
   fontsize,
-  onClick
+  onClick,
+  downloadLink,
+  fileName,
 }: Props) => {
   return (
     <Button
-    onClick={onClick}
+      component={downloadLink ? "a" : "button"}
+      href={downloadLink || undefined}
+      download={downloadLink ? fileName || true : undefined} // ✅ Only apply if downloadLink exists
+      onClick={onClick}
       sx={{
         height: height ? height : "auto",
         width: width ? width : "auto",
@@ -36,6 +43,7 @@ const CustomButton = ({
         color: COLORS.primary,
         position: "relative",
         overflow: "hidden",
+        fontWeight: 600,
         padding: "10px",
         "&:hover": {
           transform: "translateY(-5px)",
@@ -52,7 +60,7 @@ const CustomButton = ({
     >
       {title && (
         <Typography
-          sx={{ fontSize: fontsize ? fontsize : "13px", fontWeight:500 }}
+          sx={{ fontSize: fontsize ? fontsize : "13px", fontWeight: 500 }}
         >
           {title}
         </Typography>

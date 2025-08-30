@@ -1,20 +1,19 @@
 import { Container, Grid, Stack, Typography } from "@mui/material";
 import { CustomCard } from "@components/index";
 import { COLORS } from "@constants/color";
-import { useGsapAnimation } from "@hooks/UseGsapAnimation";
+import { portfolioData } from "@constants/data";
+
 
 const MyPortfolio = () => {
-  const { elementsRef, textRef } = useGsapAnimation(); // Use the hook
+
 
   return (
-    <Container maxWidth="lg" disableGutters>
+    <Container maxWidth="lg" disableGutters component={'section'} id="portfolio">
       <Stack sx={{ textAlign: "center", gap: "15px" }}>
         <Typography
           variant="body2"
           sx={{ letterSpacing: "2px", fontWeight: 500, color: COLORS.subtitle }}
-          ref={(el) => {
-            textRef.current[0] = el;
-          }}
+
         >
           Visit my portfolio and keep your feedback
         </Typography>
@@ -26,24 +25,24 @@ const MyPortfolio = () => {
             fontSize: { md: "60px", xs: "34px", sm: "40px" },
             color: COLORS.bodyWhite,
           }}
-          ref={(el) => {
-            textRef.current[1] = el;
-          }}
+
         >
           My Portfolio
         </Typography>
       </Stack>
-
-      {/* Cards Section */}
-      <Grid container spacing={4}>
-        {[1, 2, 3, 4, 5, 6].map((_, index) => (
-          <Grid item key={index} md={4} sm={6} xs={12}>
-            <div ref={(el) => { elementsRef.current[index] = el; }}>
-              <CustomCard favorites={true} />
-            </div>
+      <Grid container spacing={3}>
+        {portfolioData.map((item) => (
+          <Grid item md={4} sm={6} xs={12} key={item.id}>
+            <CustomCard
+              image={item.image}
+              category={item.category}
+              title={item.title}
+              link={item.link} // ✅ pass link
+            />
           </Grid>
         ))}
       </Grid>
+
     </Container>
   );
 };

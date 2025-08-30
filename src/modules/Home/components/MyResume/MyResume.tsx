@@ -13,7 +13,7 @@ import { useState } from "react";
 import InterviewTab from "../InterviewTab/InterviewTab";
 import SkillSection from "../SkillSection/SkillSection";
 import { designSkill, developmentSkill } from "@constants/data";
-import { useGsapAnimation } from "@hooks/UseGsapAnimation";
+
 
 const MyResume = () => {
   const [value, setValue] = useState("Education");
@@ -21,17 +21,15 @@ const MyResume = () => {
   const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
-  const {textRef}=useGsapAnimation()
+
 
   return (
-    <Container maxWidth="lg" disableGutters>
+    <Container maxWidth="lg" disableGutters component={'section'} id="resume">
       <Stack sx={{ textAlign: "center", gap: "15px" }}>
         <Typography
           variant="body2"
           sx={{ letterSpacing: "2px", fontWeight: 500, color: COLORS.subtitle }}
-          ref={(el) => {
-            textRef.current[0] = el;
-          }}
+    
         >
           7+ Years of Experience
         </Typography>
@@ -43,9 +41,7 @@ const MyResume = () => {
             fontSize: { md: "60px", xs: "34px", sm: "40px" },
             color: COLORS.bodyWhite,
           }}
-          ref={(el) => {
-            textRef.current[1] = el;
-          }}
+    
         >
           My Resume
         </Typography>

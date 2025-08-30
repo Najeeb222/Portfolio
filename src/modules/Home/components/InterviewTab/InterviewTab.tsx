@@ -1,10 +1,10 @@
 import { PortfolioCard } from "@components/index";
 import { COLORS } from "@constants/color";
-import { useGsapAnimation } from "@hooks/UseGsapAnimation";
-import { Container, Grid, Stack, Typography } from "@mui/material";
+
+import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 
 const InterviewTab = () => {
-  const { elementsRef, textRef } = useGsapAnimation();
+
 
   return (
     <Container disableGutters>
@@ -20,9 +20,7 @@ const InterviewTab = () => {
                 fontWeight: 500,
                 color: COLORS.subtitle,
               }}
-              ref={(el) => {
-                textRef.current[0] = el;
-              }}
+          
             >
               2007 - 2010
             </Typography>
@@ -34,9 +32,7 @@ const InterviewTab = () => {
                 fontWeight: "700",
                 mb: "35px",
               }}
-              ref={(el) => {
-                textRef.current[1] = el; 
-              }}
+             
             >
               Company Experience
             </Typography>
@@ -44,7 +40,7 @@ const InterviewTab = () => {
 
           {[1, 2, 3].map((_item, index) => (
             <Stack key={`company-${index}`} sx={{ mb: "30px" }}>
-              <div ref={(el) => { elementsRef.current[index] = el; }}> 
+              <div > 
                 <PortfolioCard />
               </div>
             </Stack>
@@ -61,9 +57,7 @@ const InterviewTab = () => {
                 fontWeight: 500,
                 color: COLORS.subtitle,
               }}
-              ref={(el) => {
-                textRef.current[2] = el; 
-              }}
+           
             >
               2007 - 2010
             </Typography>
@@ -75,9 +69,7 @@ const InterviewTab = () => {
                 fontWeight: "700",
                 mb: "35px",
               }}
-              ref={(el) => {
-                textRef.current[3] = el; 
-              }}
+            
             >
               Job Experience
             </Typography>
@@ -85,10 +77,10 @@ const InterviewTab = () => {
 
           {[1, 2, 3].map((_item, index) => (
             <Stack key={`job-${index}`} sx={{ mb: "30px" }}>
-              <div ref={(el) => { elementsRef.current[3 + index] = el; }}> 
+              <Box> 
                 
                 <PortfolioCard />
-              </div>
+              </Box>
             </Stack>
           ))}
         </Grid>
