@@ -28,7 +28,7 @@ export default function Navbar(props: any) {
 
   const { scrollY } = useScroll();
 
-  // ✅ Detect scroll
+
   useMotionValueEvent(scrollY, "change", () => {
     setIsScrolled(scrollY.get() > 100);
 
@@ -37,11 +37,11 @@ export default function Navbar(props: any) {
     navItems.forEach((item) => {
       const section = document.querySelector(item.path) as HTMLElement;
       if (section) {
-        const offsetTop = section.offsetTop - 120; // adjust navbar height
+        const offsetTop = section.offsetTop - 120; 
         const offsetBottom = offsetTop + section.offsetHeight;
 
         if (scrollPos >= offsetTop && scrollPos < offsetBottom) {
-          setActive(item.path); // update active section
+          setActive(item.path); 
         }
       }
     });
@@ -261,7 +261,7 @@ export default function Navbar(props: any) {
         </Box>
       </AppBar>
 
-      {/* 🔹 Drawer (Mobile) */}
+    
       <nav>
         <Drawer
           container={container}

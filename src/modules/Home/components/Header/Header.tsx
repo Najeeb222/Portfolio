@@ -4,7 +4,6 @@ import { FindWithMe, CardWrapper } from "@components/index";
 import { COLORS } from "@constants/color";
 import { motion } from "framer-motion";
 
-// Text animations - now sliding from LEFT
 const textVariant = {
   hidden: { opacity: 0, x: -50 },
   visible: (i: number) => ({
@@ -14,7 +13,7 @@ const textVariant = {
   }),
 };
 
-// Social icons fade-in
+
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
   visible: {
@@ -34,7 +33,7 @@ const Header = () => {
       sx={{ p: { md: 3, xs: "5px" }, mt: "90px" ,}}
     >
       <Grid container spacing={4} alignItems="center">
-        {/* ==== IMAGE SECTION (CardWrapper height 70%) ==== */}
+    
         <Grid
           item
           xs={12}
@@ -49,7 +48,7 @@ const Header = () => {
             viewport={{ once: true }}
           >
             <CardWrapper width="100%" height="70%">
-              {/* Clip image to wrapper radius */}
+         
               <Box sx={{ borderRadius: "inherit", overflow: "hidden" }}>
                 <Box
                   component="img"
@@ -67,7 +66,7 @@ const Header = () => {
           </motion.div>
         </Grid>
 
-        {/* ==== TEXT SECTION ==== */}
+     
         <Grid
           item
           xs={12}
@@ -135,7 +134,7 @@ const Header = () => {
             </motion.div>
           </Stack>
 
-          {/* Social Icons */}
+      
           <motion.div
             variants={fadeInUp}
             initial="hidden"

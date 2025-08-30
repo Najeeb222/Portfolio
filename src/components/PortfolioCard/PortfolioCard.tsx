@@ -1,3 +1,4 @@
+// PortfolioCard.tsx
 import CardWrapper from "@components/CardWrapper/CardWrapper";
 import { COLORS } from "@constants/color";
 import { shadows } from "@constants/shadow";
@@ -5,7 +6,14 @@ import { Circle } from "@mui/icons-material";
 import { Typography, Box, Stack, Divider } from "@mui/material";
 import { useState } from "react";
 
-const PortfolioCard = () => {
+type PortfolioCardProps = {
+  title: string;
+  subtitle: string; // university, company, or duration
+  description: string;
+  score?: string; // optional: GPA, rating, etc
+};
+
+const PortfolioCard = ({ title, subtitle, description, score }: PortfolioCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -14,7 +22,7 @@ const PortfolioCard = () => {
         display: "flex",
         alignItems: "center",
         position: "relative",
-        paddingLeft:  "30px" ,
+        paddingLeft: "30px",
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -31,6 +39,7 @@ const PortfolioCard = () => {
         }}
       />
 
+     {/* Timeline Dot */}
       <Box
         sx={{
           position: "absolute",
@@ -39,13 +48,13 @@ const PortfolioCard = () => {
           transform: "translateY(-50%)",
           width: { xs: "12px", sm: "16px" },
           height: { xs: "12px", sm: "16px" },
-          zIndex: "22",
           borderRadius: "50%",
           backgroundColor: "#e0e0e0",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           transition: "background-color 0.3s",
+          zIndex: 2,
         }}
       >
         <Circle
@@ -54,9 +63,12 @@ const PortfolioCard = () => {
             fontSize: "12px",
             border: isHovered ? `1px solid ${COLORS.white}` : "none",
             borderRadius: "50%",
+            transition: "all 0.3s ease",
           }}
         />
       </Box>
+
+      {/* Connector Line */}
       <Box
         sx={{
           position: "absolute",
@@ -69,54 +81,73 @@ const PortfolioCard = () => {
           transition: "0.3s",
         }}
       />
-      <CardWrapper width={"auto"} height={"auto"} hover={true}>
-        <Stack
-          direction={"row"}
-          justifyContent={"space-between"}
-          flexWrap={"wrap"}
-          gap={"20px"}
-        >
-          <Stack gap={"8px"}>
-            <Typography
-              variant="h4"
-              sx={{ fontSize: { md: "24px", xs: "21px" }, fontWeight: 500 }}
-            >
-              Personal Portfolio April Fools
-            </Typography>
-            <Typography variant="body2">
-              University of DVI (1997 - 2001)
-            </Typography>
+
+   
+      <Box height={{ lg: "300px", md: "350px", sm: "400px", xs: "auto" }}>
+        <CardWrapper width="100%" height="100%" hover>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            flexWrap="wrap"
+            gap="20px"
+            flexGrow={1}
+          >
+            {/* Title + Subtitle */}
+            <Stack gap="8px">
+              <Typography
+                variant="h4"
+                sx={{ fontSize: { md: "24px", xs: "21px" }, fontWeight: 500 }}
+              >
+                {title}
+              </Typography>
+              <Typography variant="body2">{subtitle}</Typography>
+            </Stack>
+
+            {/* Score */}
+            {score && (
+              <Box
+                sx={{
+                  border: "none",
+                  boxShadow: isHovered ? "none" : shadows.shadowWhite3,
+                  background: isHovered ? COLORS.subtitle : COLORS.white,
+                  borderRadius: "10px",
+                  transition: "all 0.3s ease",
+                  color: isHovered ? COLORS.white : COLORS.primary,
+                  padding: "10px",
+                  width: "75px",
+                  height: "36px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontWeight: 600,
+                }}
+              >
+                {score}
+              </Box>
+            )}
           </Stack>
 
-          <Box
+          <Divider />
+
+          {/* Description */}
+          <Typography
+            fontSize="16px"
             sx={{
-              border: "none",
-              boxShadow: isHovered ? "none" : shadows.shadowWhite3,
-              background: isHovered ? COLORS.subtitle : COLORS.white,
-              borderRadius: "10px",
-              transition: "all 0.3s ease",
-              textTransform: "none",
-              color: isHovered ? COLORS.white : COLORS.primary,
-              position: "relative",
+              pb: isHovered ? 0 : "20px",
               overflow: "hidden",
-              padding: "10px",
-              width: "75px",
-              height: "36px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              textOverflow: "ellipsis",
+              display: "-webkit-box",
+           
+            
+              lineHeight: 1.5,
+            
+              transition: "0.3s",
             }}
           >
-            4.30/5
-          </Box>
-        </Stack>
-        <Divider />
-        <Typography fontSize={"18px"} sx={{ pb: isHovered ? 0 : "20px" }}>
-          The education should be very interactual. Ut tincidunt est ac dolor
-          aliquam sodales. Phasellus sed mauris hendrerit, laoreet sem in,
-          lobortis mauris hendrerit ante.
-        </Typography>
-      </CardWrapper>
+            {description}
+          </Typography>
+        </CardWrapper>
+      </Box>
     </Box>
   );
 };

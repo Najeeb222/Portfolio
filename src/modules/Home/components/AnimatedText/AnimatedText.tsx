@@ -10,7 +10,7 @@ const AnimatedText = () => {
         fontSize: { xs: "24px", sm: "32px", md: "50px" },
         fontWeight: 700,
         lineHeight: 1.2,
-        textAlign: { xs: "center", md: "left" }, // optional alignment
+        textAlign: { xs: "center", md: "left" },
       }}
     >
       Hi, I’m{" "}
@@ -50,7 +50,7 @@ const AnimatedText = () => {
         repeat={Infinity}
         style={{
           display: "inline-block",
-          fontSize: "inherit", // inherit font size from parent for responsiveness
+          fontSize: "inherit",
           fontWeight: 700,
           color: COLORS.primary,
         }}

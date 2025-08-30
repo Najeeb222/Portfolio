@@ -55,7 +55,7 @@ const ContactWithMe = () => {
                   width: "100%",
                   height: "300px",
                   objectFit: "cover",
-                  objectPosition:'center top',
+                  objectPosition: 'center top',
                   ":hover": { transform: "scale(1.1)" },
                   transition: ".4s",
                 }}
@@ -112,7 +112,7 @@ const ContactWithMe = () => {
                 >
                   Phone Number
                 </InputLabel>
-                <TextField type="number" fullWidth sx={TextFieldStyle} />
+                <TextField type="tel" fullWidth sx={TextFieldStyle} />
               </Box>
             </Stack>
 
