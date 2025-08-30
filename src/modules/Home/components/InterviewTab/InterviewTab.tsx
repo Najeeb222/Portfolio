@@ -1,6 +1,6 @@
 import { PortfolioCard } from "@components/index";
 import { COLORS } from "@constants/color";
-import { Container, Grid, Stack, Typography, Box } from "@mui/material";
+import { Container, Grid, Stack, Typography, } from "@mui/material";
 
 const InterviewTab = () => {
   return (
@@ -16,7 +16,7 @@ const InterviewTab = () => {
               fontSize: { md: "36px", sm: "30px", xs: "24px" },
               fontWeight: "700",
               mb: { xs: "20px", md: "35px" },
-              textAlign: { xs: "center", md: "left" }, // ✅ Center on mobile
+              textAlign: { xs: "center", md: "left" }, 
             }}
           >
             Education
@@ -55,7 +55,7 @@ const InterviewTab = () => {
               fontSize: { md: "36px", sm: "30px", xs: "24px" },
               fontWeight: "700",
               mb: { xs: "20px", md: "35px" },
-              textAlign: { xs: "center", md: "left" }, // ✅ Center on mobile
+              textAlign: { xs: "center", md: "left" },
             }}
           >
             Job Experience
@@ -63,11 +63,12 @@ const InterviewTab = () => {
 
 
           <Stack sx={{ gap: "30px", width: "100%" }}>
-            <PortfolioCard
-              title="FSc (Computer Science)"
-              subtitle="Board of Intermediate & Secondary Education (2017 - 2019)"
-              description="Completed FSc in the Computer Science group, gaining knowledge in Mathematics, Physics, and Computer Science, while strengthening logical thinking and problem-solving abilities for higher education."
-              score="78%"
+           <PortfolioCard
+              title="Frontend Developer"
+              subtitle="Xivia Soft. (2022 - Present)"
+         description="Worked on developing responsive and user-friendly UIs, optimizing application performance, integrating RESTful APIs, and ensuring cross-browser compatibility."
+
+
             />
 
             <PortfolioCard
