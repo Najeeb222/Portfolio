@@ -57,7 +57,7 @@ const Features = () => {
                 isArrow
                 topIcon={item.icon}
                 width={"auto"}
-                height={"auto"}
+                height={"100%"}
                 hover
                 p={{ md: "40px 50px", xs: "20px" }}
               >
@@ -108,7 +108,7 @@ const FeaturesComponentData = [
     icon: <WifiOutlined sx={iconStyles} />,
   },
   {
-    title: "Personal Branding & Portfolio",
+    title: "Personal Portfolio",
     description: "Creating professional portfolio websites that highlight skills, achievements, and personal branding.",
     icon: <SpaOutlined sx={iconStyles} />,
   },
