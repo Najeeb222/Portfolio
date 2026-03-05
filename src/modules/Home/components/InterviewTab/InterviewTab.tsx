@@ -1,6 +1,6 @@
 import { PortfolioCard } from "@components/index";
 import { COLORS } from "@constants/color";
-import { Container, Grid, Stack, Typography, } from "@mui/material";
+import { Container, Grid, Stack, Typography } from "@mui/material";
 
 const InterviewTab = () => {
   return (
@@ -8,7 +8,6 @@ const InterviewTab = () => {
       <Grid container spacing={{ md: 3, sm: 2, xs: 2 }}>
         {/* Education Section */}
         <Grid item xs={12} md={6} mb={{ xs: 4, md: 2 }}>
-
           <Typography
             variant="h2"
             sx={{
@@ -16,38 +15,30 @@ const InterviewTab = () => {
               fontSize: { md: "36px", sm: "30px", xs: "24px" },
               fontWeight: "700",
               mb: { xs: "20px", md: "35px" },
-              textAlign: { xs: "center", md: "left" }, 
+              textAlign: { xs: "center", md: "left" },
             }}
           >
             Education
           </Typography>
 
-
           <Stack sx={{ gap: "30px", width: "100%" }}>
-
             <PortfolioCard
               title="Matriculation (Medical)"
-              subtitle="Board of Intermediate & Secondary Education (2015 - 2017)"
+              subtitle="Board of Intermediate & Secondary Education (2021 - 2023)"
               description="Completed Matric in the Medical group with a solid foundation in Biology, Chemistry, and Physics, developing analytical and problem-solving skills that built the basis for future studies."
               score="86%"
             />
 
-
-
-
             <PortfolioCard
               title="FSc (Computer Science)"
-              subtitle="Board of Intermediate & Secondary Education (2017 - 2019)"
+              subtitle="Board of Intermediate & Secondary Education (2023 - 2025)"
               description="Focused on Computer Science, Mathematics, and Physics, building a strong base for higher studies in technology."
               score="72%"
             />
-
           </Stack>
         </Grid>
 
-
         <Grid item xs={12} md={6} mb={{ xs: 2, md: 2 }}>
-
           <Typography
             variant="h2"
             sx={{
@@ -61,19 +52,16 @@ const InterviewTab = () => {
             Job Experience
           </Typography>
 
-
           <Stack sx={{ gap: "30px", width: "100%" }}>
-           <PortfolioCard
+            <PortfolioCard
               title="Frontend Developer"
-              subtitle="Xivia Soft. (2022 - Present)"
-         description="Worked on developing responsive and user-friendly UIs, optimizing application performance, integrating RESTful APIs, and ensuring cross-browser compatibility."
-
-
+              subtitle="Xivia Soft. (2024 - Present)"
+              description="Worked on developing responsive and user-friendly UIs, optimizing application performance, integrating RESTful APIs, and ensuring cross-browser compatibility."
             />
 
             <PortfolioCard
               title="Frontend Developer Internship"
-              subtitle="Krytix Solution. (2025 - Present)"
+              subtitle="Krytix Solution. (2025)"
               description="Focused on creating scalable frontend solutions, enhancing user experience with responsive design, and implementing efficient API integrations."
             />
           </Stack>

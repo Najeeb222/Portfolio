@@ -13,28 +13,27 @@ import { useState } from "react";
 const HomeContainer = () => {
   const [isLoading, setIsLoading] = useState(true);
 
-  if (isLoading) {
-    // Only render loader while loading
-    return <PortfolioLoader onLoadingComplete={() => setIsLoading(false)} />;
-  }
-
-  // Render the main content only after loading
   return (
-    <AppLayout>
-      <Stack gap="100px" px={{ md: 0, xs: "15px" }}>
-        <Header />
+    <>
+      {isLoading && (
+        <PortfolioLoader onLoadingComplete={() => setIsLoading(false)} />
+      )}
+      <AppLayout>
+        <Stack gap="100px" px={{ md: 0, xs: "15px" }}>
+          <Header />
 
-        <Divider />
-        <Features />
-        <Divider />
-        <MyPortfolio />
-        <Divider />
-        <MyResume />
-        <Divider />
-        <ContactWithMe />
-        <Divider />
-      </Stack>
-    </AppLayout>
+          <Divider />
+          <Features />
+          <Divider />
+          <MyPortfolio />
+          <Divider />
+          <MyResume />
+          <Divider />
+          <ContactWithMe />
+          <Divider />
+        </Stack>
+      </AppLayout>
+    </>
   );
 };
 

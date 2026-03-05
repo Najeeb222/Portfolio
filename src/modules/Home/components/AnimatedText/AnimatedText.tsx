@@ -37,11 +37,13 @@ const AnimatedText = () => {
       </Typography>
       <TypeAnimation
         sequence={[
-          "Developer.",
+          "MERN Stack Developer.",
           1500,
           "Professional Coder.",
           1500,
           "Next.js Developer.",
+          1500,
+          "React Developer.",
           1500,
         ]}
         wrapper="span"

@@ -13,7 +13,6 @@ const textVariant = {
   }),
 };
 
-
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
   visible: {
@@ -30,10 +29,9 @@ const Header = () => {
       component="section"
       maxWidth="lg"
       disableGutters
-      sx={{ p: { md: 3, xs: "5px" }, mt: "90px" ,}}
+      sx={{ p: { md: 3, xs: "5px" }, mt: "90px" }}
     >
       <Grid container spacing={4} alignItems="center">
-    
         <Grid
           item
           xs={12}
@@ -48,7 +46,6 @@ const Header = () => {
             viewport={{ once: true }}
           >
             <CardWrapper width="100%" height="70%">
-         
               <Box sx={{ borderRadius: "inherit", overflow: "hidden" }}>
                 <Box
                   component="img"
@@ -66,7 +63,6 @@ const Header = () => {
           </motion.div>
         </Grid>
 
-     
         <Grid
           item
           xs={12}
@@ -125,7 +121,11 @@ const Header = () => {
                   fontSize: { xs: "14px", sm: "16px", md: "18px" },
                 }}
               >
-                I’m a passionate web developer specializing in{" "}
+                I’m a passionate{" "}
+                <strong style={{ color: COLORS.primary }}>
+                  MERN Stack Developer
+                </strong>{" "}
+                specializing in{" "}
                 <strong style={{ color: COLORS.primary }}>
                   modern, user-friendly applications
                 </strong>{" "}
@@ -134,7 +134,6 @@ const Header = () => {
             </motion.div>
           </Stack>
 
-      
           <motion.div
             variants={fadeInUp}
             initial="hidden"

@@ -1,6 +1,13 @@
 import { CardWrapper } from "@components/index";
 import { COLORS } from "@constants/color";
-import { DesktopWindows, WifiOutlined, SpaOutlined, Storage, Layers, DesignServices } from "@mui/icons-material";
+import {
+  DesktopWindows,
+  WifiOutlined,
+  SpaOutlined,
+  Storage,
+  Layers,
+  DesignServices,
+} from "@mui/icons-material";
 import { Container, Grid, Stack, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 
@@ -16,7 +23,12 @@ const cardVariant = {
 
 const Features = () => {
   return (
-    <Container component={"section"} id="features" maxWidth={"lg"} disableGutters>
+    <Container
+      component={"section"}
+      id="features"
+      maxWidth={"lg"}
+      disableGutters
+    >
       <Stack sx={{ textAlign: { md: "start", xs: "center" } }}>
         <Typography
           variant="body2"
@@ -84,32 +96,38 @@ const iconStyles = {
 const FeaturesComponentData = [
   {
     title: "Web Development",
-    description: "Creating fast, responsive, and scalable websites using React, Next.js, and modern web technologies.",
+    description:
+      "Creating fast, responsive, and scalable websites using React, Next.js, and modern web technologies.",
     icon: <DesktopWindows sx={iconStyles} />,
   },
   {
-    title: "Full-Stack Development",
-    description: "Building robust full-stack applications with clean architecture and optimized performance across the stack.",
+    title: "MERN Stack",
+    description:
+      "Building robust full-stack applications with clean architecture and optimized performance",
     icon: <Layers sx={iconStyles} />,
   },
   {
     title: "UI/UX Design",
-    description: "Designing intuitive, user-centered interfaces that balance aesthetics with functionality and accessibility.",
+    description:
+      "Designing intuitive, user-centered interfaces that balance aesthetics with functionality and accessibility.",
     icon: <DesignServices sx={iconStyles} />,
   },
   {
     title: "Backend & Firebase",
-    description: "Developing secure, reliable backends with Firebase for authentication, databases, and real-time features.",
+    description:
+      "Developing secure, reliable backends with Firebase for authentication, databases, and real-time features.",
     icon: <Storage sx={iconStyles} />,
   },
   {
     title: "API Integration",
-    description: "Seamlessly integrating REST APIs to connect applications with external services and data sources.",
+    description:
+      "Seamlessly integrating REST APIs to connect applications with external services and data sources.",
     icon: <WifiOutlined sx={iconStyles} />,
   },
   {
     title: "Personal Portfolio",
-    description: "Creating professional portfolio websites that highlight skills, achievements, and personal branding.",
+    description:
+      "Creating professional portfolio websites that highlight skills, achievements, and personal branding.",
     icon: <SpaOutlined sx={iconStyles} />,
   },
 ];

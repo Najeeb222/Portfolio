@@ -18,8 +18,6 @@ import { navItems } from "@constants/data";
 
 const drawerWidth = 320;
 
-
-
 export default function Navbar(props: any) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -27,7 +25,6 @@ export default function Navbar(props: any) {
   const [active, setActive] = React.useState("#home");
 
   const { scrollY } = useScroll();
-
 
   useMotionValueEvent(scrollY, "change", () => {
     setIsScrolled(scrollY.get() > 100);
@@ -37,11 +34,11 @@ export default function Navbar(props: any) {
     navItems.forEach((item) => {
       const section = document.querySelector(item.path) as HTMLElement;
       if (section) {
-        const offsetTop = section.offsetTop - 120; 
+        const offsetTop = section.offsetTop - 120;
         const offsetBottom = offsetTop + section.offsetHeight;
 
         if (scrollPos >= offsetTop && scrollPos < offsetBottom) {
-          setActive(item.path); 
+          setActive(item.path);
         }
       }
     });
@@ -80,16 +77,27 @@ export default function Navbar(props: any) {
               alt="logo"
               width={"100px"}
               height={"100px"}
-              sx={{ borderRadius: "50%", objectFit: "cover", border: `1px solid ${COLORS.danger}` }}
+              sx={{
+                borderRadius: "50%",
+                objectFit: "cover",
+                border: `1px solid ${COLORS.danger}`,
+                rotate: "180deg",
+              }}
             />
-            <CustomButton width={"auto"} height={"50px"} hover={true} icon={<Close />} />
+            <CustomButton
+              width={"auto"}
+              height={"50px"}
+              hover={true}
+              icon={<Close />}
+            />
           </Stack>
           <Typography color={COLORS.bodyWhite} textAlign={"start"}>
-            Available for freelance — let's create something impactful together.          </Typography>
+            Available for freelance — let's create something impactful
+            together.{" "}
+          </Typography>
           <Divider />
         </Stack>
 
-      
         {navItems.map((item) => (
           <ListItem key={item.title} disablePadding>
             <a
@@ -132,8 +140,6 @@ export default function Navbar(props: any) {
           </ListItem>
         ))}
 
-
-        
         <Box mt={"30px"}>
           <CustomButton
             title="Download Resume"
@@ -161,7 +167,6 @@ export default function Navbar(props: any) {
       <AppBar
         component="nav"
         position="fixed"
-        
         sx={{
           backgroundColor: isScrolled ? "#ecf0f3" : "transparent",
           paddingY: 2,
@@ -187,7 +192,13 @@ export default function Navbar(props: any) {
                 alt="Logo"
                 width={"100%"}
                 height={"100%"}
-                sx={{ height: "70px", width: "70px", objectFit: "cover", borderRadius: '50%', border: `1px solid ${COLORS.danger}` }}
+                sx={{
+                  height: "70px",
+                  width: "70px",
+                  objectFit: "cover",
+                  borderRadius: "50%",
+                  border: `1px solid ${COLORS.danger}`,
+                }}
               />
 
               {/* 🔹 Desktop Nav */}
@@ -239,13 +250,12 @@ export default function Navbar(props: any) {
                   <CustomButton
                     title="Download Resume"
                     fontsize="16px"
-                    height={'55px'}
+                    height={"55px"}
                     width="200px"
                     hover
                     downloadLink="/assets/files/NajeebResume.pdf"
                     fileName="Najeeb_Ullah_Resume.pdf"
                   />
-
                 </Box>
               </Box>
             </Box>
@@ -261,7 +271,6 @@ export default function Navbar(props: any) {
         </Box>
       </AppBar>
 
-    
       <nav>
         <Drawer
           container={container}

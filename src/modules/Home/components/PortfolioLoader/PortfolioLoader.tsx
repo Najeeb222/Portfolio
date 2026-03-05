@@ -1,42 +1,14 @@
 import { useEffect, useState } from "react";
-import {
-  Box,
-  Typography,
-  styled,
-  keyframes,
-  Fade,
-} from "@mui/material";
+import { styled, Box, Typography } from "@mui/material";
+import { motion, AnimatePresence } from "framer-motion";
+import { COLORS } from "@constants/color";
 
-// ===== Animations =====
-const gradient = keyframes`
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-`;
+// --- BANTER LOADER ANIMATIONS ---
+/**
+ * Refined Banter Loader matching the user's request but polished for a premium UI/UX feel.
+ */
 
-const glow = keyframes`
-  0% { text-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff, 0 0 40px #00e5ff; }
-  50% { text-shadow: 0 0 20px #ff0080, 0 0 30px #ff0080, 0 0 60px #ff0080; }
-  100% { text-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff, 0 0 40px #00e5ff; }
-`;
-
-const float = keyframes`
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
-  100% { transform: translateY(0px); }
-`;
-
-const typewriter = keyframes`
-  from { width: 0; }
-  to { width: 100%; }
-`;
-
-const blink = keyframes`
-  50% { border-color: transparent; }
-`;
-
-
-const LoaderContainer = styled(Box)(({ theme }) => ({
+const LoaderOverlay = styled(motion.div)(({ theme }) => ({
   position: "fixed",
   top: 0,
   left: 0,
@@ -46,143 +18,280 @@ const LoaderContainer = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  background: `linear-gradient(-45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main}, #0f2027, #2c5364)`,
-  backgroundSize: "400% 400%",
-  animation: `${gradient} 12s ease infinite`,
+  backgroundColor: "#ecf0f3", // Theme background
   zIndex: 9999,
-  color: "white",
   overflow: "hidden",
 }));
 
-const LogoOrb = styled(Box)(() => ({
-  width: 160,
-  height: 160,
-  borderRadius: "50%",
-  background: "rgba(255, 255, 255, 0.05)",
-  backdropFilter: "blur(10px)",
-  border: "2px solid rgba(255, 255, 255, 0.2)",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  animation: `${float} 4s ease-in-out infinite`,
-  boxShadow:
-    "0 0 30px rgba(0,229,255,0.6), inset 0 0 30px rgba(255,255,255,0.1)",
+const BackgroundPattern = styled(Box)({
+  position: "absolute",
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  opacity: 0.03,
+  backgroundImage: `radial-gradient(circle at 25px 25px, ${COLORS.primary} 2px, transparent 2px)`,
+  backgroundSize: "50px 50px",
+  pointerEvents: "none",
+});
+
+const BanterLoaderContainer = styled(Box)(() => ({
+  position: "relative",
+  width: "80px",
+  height: "80px",
+  marginBottom: "40px",
+  display: "grid",
+  gridTemplateColumns: "repeat(3, 1fr)",
+  gap: "6px",
 }));
 
-const LogoText = styled(Typography)(() => ({
+const BoxElement = styled(motion.div)(() => ({
+  width: "22px",
+  height: "22px",
+  backgroundColor: COLORS.primary, // #ff014f
+  borderRadius: "4px",
+  boxShadow: "4px 4px 8px rgba(0,0,0,0.1), -2px -2px 6px rgba(255,255,255,0.8)", // Soft neumorphic touch
+}));
+
+const BrandingWrapper = styled(motion.div)(() => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  textAlign: "center",
+  position: "relative",
+}));
+
+const NameText = styled(Typography)(() => ({
   fontSize: "2.5rem",
-  fontWeight: "bold",
-  fontFamily: "Work Sans, sans-serif",
-  animation: `${glow} 3s ease-in-out infinite`,
-  letterSpacing: "3px",
-  userSelect: "none",
+  fontWeight: 800,
+  letterSpacing: "4px",
+  textTransform: "uppercase",
+  color: "#3c3e41", // COLORS.bodyWhite
+  fontFamily: "'Montserrat', sans-serif",
+  marginBottom: "4px",
+  position: "relative",
+  "&::after": {
+    content: '""',
+    position: "absolute",
+    bottom: -4,
+    left: "50%",
+    transform: "translateX(-50%)",
+    width: 0,
+    height: "2px",
+    background: COLORS.primary,
+    transition: "width 0.6s ease",
+  },
+  "&:hover::after": {
+    width: "80%",
+  },
 }));
 
-const TypingTagline = styled(Typography)(() => ({
-  fontSize: "1.2rem",
-  marginTop: "1rem",
-  fontFamily: "monospace",
-  fontWeight: 300,
-  whiteSpace: "nowrap",
-  overflow: "hidden",
-  borderRight: "2px solid #fff",
-  width: "0",
-  animation: `${typewriter} 3s steps(25, end) forwards, ${blink} 0.75s step-end infinite`,
-}));
-
-const ProgressRing = styled("div")<{ progress: number }>(({ progress }) => ({
-  marginTop: "2rem",
-  width: 120,
-  height: 120,
-  borderRadius: "50%",
-  background: `conic-gradient(#00e5ff ${progress * 3.6}deg, rgba(255,255,255,0.1) ${progress * 3.6}deg)`,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  boxShadow: "0 0 25px rgba(0,229,255,0.5)",
-  transition: "background 0.3s ease",
-}));
-
-const ProgressInner = styled("div")(() => ({
-  width: 90,
-  height: 90,
-  borderRadius: "50%",
-  background: "rgba(0,0,0,0.4)",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  color: "white",
-  fontFamily: "monospace",
+const RoleText = styled(Typography)(() => ({
   fontSize: "0.9rem",
+  fontWeight: 500,
+  letterSpacing: "3px",
+  textTransform: "uppercase",
+  color: COLORS.primary,
+  fontFamily: "'Montserrat', sans-serif",
+  opacity: 0.8,
 }));
 
+const ProgressBar = styled(motion.div)({
+  position: "absolute",
+  bottom: "-20px",
+  left: "50%",
+  transform: "translateX(-50%)",
+  width: "200px",
+  height: "3px",
+  background: "rgba(255,1,79,0.1)",
+  borderRadius: "4px",
+  overflow: "hidden",
+  "&::after": {
+    content: '""',
+    position: "absolute",
+    top: 0,
+    left: 0,
+    height: "100%",
+    width: "var(--progress)",
+    background: `linear-gradient(90deg, ${COLORS.primary}, #ff4d7f)`,
+    borderRadius: "4px",
+    animation: "progressPulse 1.5s ease infinite",
+  },
+  "@keyframes progressPulse": {
+    "0%, 100%": { opacity: 1 },
+    "50%": { opacity: 0.7 },
+  },
+});
+
+// --- COMPONENT ---
 
 interface PortfolioLoaderProps {
   onLoadingComplete?: () => void;
   minDisplayTime?: number;
+  loadingProgress?: number;
 }
 
 const PortfolioLoader: React.FC<PortfolioLoaderProps> = ({
   onLoadingComplete,
-  minDisplayTime = 4000,
+  minDisplayTime = 3000,
+  loadingProgress = 0,
 }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          return 100;
-        }
-        return prev + Math.floor(Math.random() * 8) + 3;
-      });
-    }, 180);
+    document.body.style.overflow = "hidden";
 
     const timer = setTimeout(() => {
       setIsVisible(false);
-      onLoadingComplete?.();
+      setTimeout(() => {
+        onLoadingComplete?.();
+      }, 800);
     }, minDisplayTime);
 
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timer);
-    };
-  }, [onLoadingComplete, minDisplayTime]);
+    let interval: NodeJS.Timeout;
 
-  if (!isVisible) return null;
+    // Simulate progress if not provided
+    if (loadingProgress === 0) {
+      interval = setInterval(() => {
+        setProgress((prev) => {
+          const newProgress = prev + Math.random() * 15;
+          return newProgress >= 100 ? 100 : newProgress;
+        });
+      }, 400);
+    } else {
+      setProgress(loadingProgress);
+    }
+
+    return () => {
+      clearTimeout(timer);
+      if (interval) clearInterval(interval);
+      document.body.style.overflow = "unset";
+    };
+  }, [onLoadingComplete, minDisplayTime, loadingProgress]);
+
+  // Enhanced Framer Motion Variants for the grid boxes
+  const boxVariants = (index: number) => ({
+    animate: {
+      scale: [1, 1.2, 0.9, 1.1, 1],
+      rotate: [0, 0, 180, 180, 0],
+      borderRadius: ["4px", "20px", "50%", "12px", "4px"],
+      backgroundColor: [
+        COLORS.primary,
+        "#ff6b9d", // secondary/lighter primary
+        COLORS.primary,
+      ],
+      y: [0, -5, 0, 5, 0],
+      transition: {
+        duration: 2.5,
+        repeat: Infinity,
+        ease: "circInOut",
+        delay: index * 0.08,
+        times: [0, 0.2, 0.4, 0.6, 1],
+      },
+    },
+  });
+
+  // Container animation for entrance
+  const containerVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  // Text animation variants
+  const textVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  };
 
   return (
-    <Fade in={true} timeout={800}>
-      <LoaderContainer>
-     
-        <LogoOrb>
-          <LogoText>NU</LogoText>
-        </LogoOrb>
-
-       
-        <TypingTagline>
-          {progress < 40
-            ? "Designing Interfaces..."
-            : progress < 75
-            ? "Developing Ideas..."
-            : "Delivering Impact..."}
-        </TypingTagline>
-
-
-        <ProgressRing progress={progress}>
-          <ProgressInner>{progress}%</ProgressInner>
-        </ProgressRing>
-
-        <Typography
-          variant="caption"
-          sx={{ mt: 3, opacity: 0.6, letterSpacing: 1 }}
+    <AnimatePresence mode="wait">
+      {isVisible && (
+        <LoaderOverlay
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{
+            opacity: 0,
+            y: -20,
+            transition: { duration: 0.8, ease: [0.645, 0.045, 0.355, 1] },
+          }}
         >
-          Crafting something amazing...
-        </Typography>
-      </LoaderContainer>
-    </Fade>
+          <BackgroundPattern />
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <BanterLoaderContainer>
+              {[...Array(9)].map((_, i) => (
+                <BoxElement
+                  key={i}
+                  variants={boxVariants(i)}
+                  animate="animate"
+                  whileHover={{ scale: 1.1 }}
+                />
+              ))}
+            </BanterLoaderContainer>
+
+            <BrandingWrapper
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+            >
+              <motion.div variants={textVariants}>
+                <NameText>Najeeb</NameText>
+              </motion.div>
+
+              <motion.div variants={textVariants} transition={{ delay: 0.2 }}>
+                <RoleText>MERN Stack Developer</RoleText>
+              </motion.div>
+
+              <ProgressBar
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8 }}
+                style={{
+                  ["--progress" as any]: `${progress}%`,
+                }}
+              />
+            </BrandingWrapper>
+          </motion.div>
+
+          {/* Loading percentage */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.6 }}
+            transition={{ delay: 0.8 }}
+            style={{
+              position: "absolute",
+              bottom: 40,
+              right: 40,
+              fontSize: "0.8rem",
+              color: COLORS.primary,
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 500,
+            }}
+          >
+            {Math.round(progress)}%
+          </motion.div>
+        </LoaderOverlay>
+      )}
+    </AnimatePresence>
   );
 };
 

@@ -38,7 +38,7 @@ const MyResume = () => {
             fontSize: { xs: "12px", sm: "14px", md: "16px" },
           }}
         >
-          2+ Years of Experience
+          1+ Years of Experience
         </Typography>
         <Typography
           variant="h2"

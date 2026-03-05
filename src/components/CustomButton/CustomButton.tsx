@@ -12,6 +12,7 @@ type Props = {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   downloadLink?: string; // 🔥 File URL
   fileName?: string; // 🔥 Downloaded file name
+  type?: "button" | "submit" | "reset";
 };
 
 const CustomButton = ({
@@ -24,6 +25,7 @@ const CustomButton = ({
   onClick,
   downloadLink,
   fileName,
+  type,
 }: Props) => {
   return (
     <Button
@@ -31,6 +33,7 @@ const CustomButton = ({
       href={downloadLink || undefined}
       download={downloadLink ? fileName || true : undefined} // ✅ Only apply if downloadLink exists
       onClick={onClick}
+      type={type}
       sx={{
         height: height ? height : "auto",
         width: width ? width : "auto",

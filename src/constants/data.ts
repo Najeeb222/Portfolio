@@ -19,7 +19,7 @@ export const developmentSkill = [
   { title: "MATERIAL UI", value: 80 },
   { title: "REACT QUERY", value: 85 },
   { title: "FIREBASE", value: 75 },
-  { title: "APPWRITE", value: 70 },
+  { title: "MERN STACK", value: 85 },
   { title: "NODE BASICS", value: 60 },
   { title: "GITHUB", value: 85 },
   { title: "API INTEGRATION", value: 80 },
@@ -52,7 +52,7 @@ export const portfolioData = [
   {
     id: 3,
     category: "AUTHENTICATION",
-    title: "Login & Authentication System",
+    title: "Login & Authentication",
     image: "/assets/images/auth.jpg",
     link: "https://auth-ten-chi.vercel.app/login",
   },
