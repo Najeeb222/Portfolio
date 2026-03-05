@@ -8,7 +8,7 @@ import { COLORS } from "@constants/color";
  * Refined Banter Loader matching the user's request but polished for a premium UI/UX feel.
  */
 
-const LoaderOverlay = styled(motion.div)(({ theme }) => ({
+const LoaderOverlay = styled(motion.div)(() => ({
   position: "fixed",
   top: 0,
   left: 0,
