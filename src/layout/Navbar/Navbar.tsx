@@ -73,7 +73,7 @@ export default function Navbar(props: any) {
           >
             <Box
               component={"img"}
-              src="/assets/images/myImg.png"
+              src="/assets/images/headerImg.png"
               alt="logo"
               width={"100px"}
               height={"100px"}
@@ -81,7 +81,7 @@ export default function Navbar(props: any) {
                 borderRadius: "50%",
                 objectFit: "cover",
                 border: `1px solid ${COLORS.danger}`,
-                rotate: "180deg",
+                // rotate: "180deg",
               }}
             />
             <CustomButton
@@ -188,7 +188,7 @@ export default function Navbar(props: any) {
             >
               <Box
                 component={"img"}
-                src="/assets/images/myImg.png"
+                src="/assets/images/headerImg.png"
                 alt="Logo"
                 width={"100%"}
                 height={"100%"}

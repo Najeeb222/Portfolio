@@ -16,7 +16,7 @@ const Footer = () => {
      
       <Box
         component="img"
-        src="assets/images/myImg.png"
+        src="assets/images/headerImg.png"
         alt="Najeeb Ullah Logo"
         sx={{ width: '70px', height: "70px",borderRadius:'50%',border:`1px solid ${COLORS.danger}`,objectFit:'cover' }}
       />
