@@ -37,7 +37,7 @@ export const navItems = [
 export const portfolioData = [
   {
     id: 1,
-    category: "Saas Application",
+    category: "SAAS APPLICATION",
     title: "Pos Storemate Saas Application",
     image: "/assets/images/pos_Storemate.png",
     link: "https://storemate-test.onrender.com/",

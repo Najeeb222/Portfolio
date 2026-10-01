@@ -38,7 +38,7 @@ const SkillSection: React.FC<SkillSectionProps> = ({ skills }) => {
             fontSize: { xs: "12px", sm: "14px", md: "16px" },
           }}
         >
-          Features
+          Skills
         </Typography>
         <Typography
           variant="h2"

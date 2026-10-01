@@ -9,7 +9,7 @@ import {
   DesignServices,
 } from "@mui/icons-material";
 import { Container, Grid, Stack, Typography } from "@mui/material";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 const cardVariant = {
   hidden: { y: 50, opacity: 0 },

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { styled, Box, Typography } from "@mui/material";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { COLORS } from "@constants/color";
 
 // --- BANTER LOADER ANIMATIONS ---
@@ -265,9 +265,9 @@ const PortfolioLoader: React.FC<PortfolioLoaderProps> = ({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.8 }}
-                style={{
-                  ["--progress" as any]: `${progress}%`,
-                }}
+                style={
+                  { "--progress": `${progress}%` } as React.CSSProperties
+                }
               />
             </BrandingWrapper>
           </motion.div>

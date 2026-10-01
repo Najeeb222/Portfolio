@@ -9,7 +9,7 @@ import ListItem from "@mui/material/ListItem";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import { Divider, Stack, Typography } from "@mui/material";
-import { useScroll, useMotionValueEvent } from "framer-motion";
+import { useScroll, useMotionValueEvent } from "motion/react";
 
 import { COLORS } from "@constants/color";
 import { CustomButton, FindWithMe } from "@components/index";
@@ -18,8 +18,7 @@ import { navItems } from "@constants/data";
 
 const drawerWidth = 320;
 
-export default function Navbar(props: any) {
-  const { window } = props;
+export default function Navbar() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [active, setActive] = React.useState("#home");
@@ -29,17 +28,11 @@ export default function Navbar(props: any) {
   useMotionValueEvent(scrollY, "change", () => {
     setIsScrolled(scrollY.get() > 100);
 
-    const scrollPos = window?.scrollY || document.documentElement.scrollTop;
-
+    // Active section = the last one whose top has passed below the navbar
     navItems.forEach((item) => {
-      const section = document.querySelector(item.path) as HTMLElement;
-      if (section) {
-        const offsetTop = section.offsetTop - 120;
-        const offsetBottom = offsetTop + section.offsetHeight;
-
-        if (scrollPos >= offsetTop && scrollPos < offsetBottom) {
-          setActive(item.path);
-        }
+      const section = document.querySelector(item.path);
+      if (section && section.getBoundingClientRect().top <= 120) {
+        setActive(item.path);
       }
     });
   });
@@ -159,9 +152,6 @@ export default function Navbar(props: any) {
     </Box>
   );
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
-
   return (
     <>
       <AppBar
@@ -273,7 +263,6 @@ export default function Navbar(props: any) {
 
       <nav>
         <Drawer
-          container={container}
           variant="temporary"
           open={mobileOpen}
           anchor="left"

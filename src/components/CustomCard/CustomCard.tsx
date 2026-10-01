@@ -2,7 +2,7 @@ import { COLORS } from "@constants/color";
 import { shadows } from "@constants/shadow";
 
 import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 type Props = {
   image: string;

@@ -13,6 +13,8 @@ type Props = {
   downloadLink?: string; // 🔥 File URL
   fileName?: string; // 🔥 Downloaded file name
   type?: "button" | "submit" | "reset";
+  href?: string; // External link, opened in a new tab
+  ariaLabel?: string;
 };
 
 const CustomButton = ({
@@ -26,12 +28,18 @@ const CustomButton = ({
   downloadLink,
   fileName,
   type,
+  href,
+  ariaLabel,
 }: Props) => {
+  const isLink = Boolean(downloadLink || href);
   return (
     <Button
-      component={downloadLink ? "a" : "button"}
-      href={downloadLink || undefined}
+      component={isLink ? "a" : "button"}
+      href={downloadLink || href || undefined}
       download={downloadLink ? fileName || true : undefined} // ✅ Only apply if downloadLink exists
+      target={href ? "_blank" : undefined}
+      rel={href ? "noopener noreferrer" : undefined}
+      aria-label={ariaLabel}
       onClick={onClick}
       type={type}
       sx={{

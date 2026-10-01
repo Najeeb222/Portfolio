@@ -2,10 +2,6 @@ import CustomButton from "@components/CustomButton/CustomButton";
 import { Facebook, GitHub, LinkedIn } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
 const FindWithMe = () => {
-  const handleClick = (url: string) => {
-    window.open(url, "_blank");
-  };
-
   return (
     <Stack gap={"20px"} width={"50%"}>
       <Typography
@@ -20,8 +16,8 @@ const FindWithMe = () => {
             key={i}
             icon={item.icon}
             hover
-            aria-label={item.label}
-            onClick={() => handleClick(item.url)}
+            ariaLabel={item.label}
+            href={item.url}
           />
         ))}
       </Stack>

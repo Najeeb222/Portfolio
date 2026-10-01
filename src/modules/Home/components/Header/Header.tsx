@@ -2,7 +2,7 @@ import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import AnimatedText from "../AnimatedText/AnimatedText";
 import { FindWithMe, CardWrapper } from "@components/index";
 import { COLORS } from "@constants/color";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 const textVariant = {
   hidden: { opacity: 0, x: -50 },
