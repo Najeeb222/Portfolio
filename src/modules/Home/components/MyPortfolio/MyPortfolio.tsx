@@ -1,48 +1,42 @@
-import { Container, Grid, Stack, Typography } from "@mui/material";
-import { CustomCard } from "@components/index";
-import { COLORS } from "@constants/color";
-import { portfolioData } from "@constants/data";
-
+import { Container, Grid } from "@mui/material";
+import { useState } from "react";
+import {
+  CustomCard,
+  ProjectDialog,
+  Reveal,
+  SectionHeading,
+} from "@components/index";
+import { portfolioData, type Project } from "@constants/data";
 
 const MyPortfolio = () => {
+  // Kept separate from `open` so the dialog content stays visible while it animates closed
+  const [selected, setSelected] = useState<Project | null>(null);
+  const [open, setOpen] = useState(false);
 
+  const handleOpen = (project: Project) => {
+    setSelected(project);
+    setOpen(true);
+  };
 
   return (
-    <Container maxWidth="lg" disableGutters component={'section'} id="portfolio">
-      <Stack sx={{ textAlign: "center", gap: "15px" }}>
-        <Typography
-          variant="body2"
-          sx={{ letterSpacing: "2px", fontWeight: 500, color: COLORS.subtitle }}
-
-        >
-          Visit my portfolio and keep your feedback
-        </Typography>
-        <Typography
-          variant="h2"
-          sx={{
-            marginBottom: "30px",
-            fontWeight: "700",
-            fontSize: { md: "60px", xs: "34px", sm: "40px" },
-            color: COLORS.bodyWhite,
-          }}
-
-        >
-          My Portfolio
-        </Typography>
-      </Stack>
+    <Container maxWidth="lg" disableGutters component={"section"} id="portfolio">
+      <SectionHeading eyebrow="Portfolio" title="Featured Projects" />
       <Grid container spacing={3}>
-        {portfolioData.map((item) => (
+        {portfolioData.map((item, index) => (
           <Grid item md={4} sm={6} xs={12} key={item.id}>
-            <CustomCard
-              image={item.image}
-              category={item.category}
-              title={item.title}
-              link={item.link} // ✅ pass link
-            />
+            <Reveal delay={(index % 3) * 0.1} style={{ height: "100%" }}>
+              <CustomCard project={item} onOpen={handleOpen} />
+            </Reveal>
           </Grid>
         ))}
       </Grid>
 
+      <ProjectDialog
+        project={selected}
+        open={open}
+        onClose={() => setOpen(false)}
+        onExited={() => setSelected(null)}
+      />
     </Container>
   );
 };

@@ -3,15 +3,16 @@ import { shadows } from "@constants/shadow";
 import {
   Box,
   Container,
-  Stack,
   Tabs,
   Tab,
-  Typography,
   Grid,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
 import { useState } from "react";
+import { motion } from "motion/react";
+import { SectionHeading } from "@components/index";
+import { DURATION, EASE_OUT } from "@constants/motion";
 import InterviewTab from "../InterviewTab/InterviewTab";
 import SkillSection from "../SkillSection/SkillSection";
 import { developmentSkill } from "@constants/data";
@@ -28,30 +29,7 @@ const MyResume = () => {
 
   return (
     <Container maxWidth="lg" disableGutters component={"section"} id="resume">
-      <Stack sx={{ textAlign: "center", gap: "15px" }}>
-        <Typography
-          variant="body2"
-          sx={{
-            letterSpacing: "2px",
-            fontWeight: 500,
-            color: COLORS.subtitle,
-            fontSize: { xs: "12px", sm: "14px", md: "16px" },
-          }}
-        >
-          1+ Years of Experience
-        </Typography>
-        <Typography
-          variant="h2"
-          sx={{
-            marginBottom: "30px",
-            fontWeight: "700",
-            fontSize: { xs: "28px", sm: "36px", md: "60px" },
-            color: COLORS.bodyWhite,
-          }}
-        >
-          My Resume
-        </Typography>
-      </Stack>
+      <SectionHeading eyebrow="1+ Years of Experience" title="My Resume" />
 
       <Box sx={{ width: "100%" }}>
         <Tabs
@@ -78,15 +56,23 @@ const MyResume = () => {
       </Box>
 
       <Box sx={{ mt: 3 }}>
-        {value === "Professional_Skill" && (
-          <Container maxWidth="lg">
-            <Grid container spacing={4}>
-              <SkillSection skills={developmentSkill} />
-            </Grid>
-          </Container>
-        )}
+        {/* Fade the panel in whenever the tab changes */}
+        <motion.div
+          key={value}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: DURATION.fast, ease: EASE_OUT }}
+        >
+          {value === "Professional_Skill" && (
+            <Container maxWidth="lg">
+              <Grid container spacing={4}>
+                <SkillSection skills={developmentSkill} />
+              </Grid>
+            </Container>
+          )}
 
-        {value === "Experience" && <InterviewTab />}
+          {value === "Experience" && <InterviewTab />}
+        </motion.div>
       </Box>
     </Container>
   );

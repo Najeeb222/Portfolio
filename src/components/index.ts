@@ -5,3 +5,6 @@ export { default as ResumeCustomCard } from "./ResumeCustomCard/ResumeCustomCard
 export { default as PortfolioCard } from "./PortfolioCard/PortfolioCard";
 export { default as BrandCard } from "./BrandCard/BrandCard";
 export { default as FindWithMe } from "./FindWithMe/FindWithMe";
+export { default as Reveal } from "./Reveal/Reveal";
+export { default as SectionHeading } from "./SectionHeading/SectionHeading";
+export { default as ProjectDialog } from "./ProjectDialog/ProjectDialog";

@@ -1,55 +1,65 @@
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import AnimatedText from "../AnimatedText/AnimatedText";
-import { FindWithMe, CardWrapper } from "@components/index";
+import { FindWithMe, CardWrapper, CustomButton } from "@components/index";
 import { COLORS } from "@constants/color";
+import { DURATION, EASE_OUT } from "@constants/motion";
+import { ArrowForward } from "@mui/icons-material";
 import { motion } from "motion/react";
 
-const textVariant = {
-  hidden: { opacity: 0, x: -50 },
-  visible: (i: number) => ({
-    opacity: 1,
-    x: 0,
-    transition: { delay: i * 0.2, duration: 0.6, ease: "easeOut" },
-  }),
+// Children reveal one after another once the intro loader is gone
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
 };
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
+const item = {
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: "easeOut" },
+    transition: { duration: DURATION.slow, ease: EASE_OUT },
   },
 };
 
-const Header = () => {
+const photo = {
+  hidden: { opacity: 0, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 1, ease: EASE_OUT, delay: 0.2 },
+  },
+};
+
+const strong = { color: COLORS.headingWv, fontWeight: 600 };
+
+type Props = {
+  ready?: boolean;
+};
+
+const Header = ({ ready = true }: Props) => {
+  const state = ready ? "visible" : "hidden";
+
   return (
     <Container
       id="home"
       component="section"
       maxWidth="lg"
       disableGutters
-      sx={{ p: { md: 3, xs: "5px" }, mt: "90px" }}
+      sx={{ p: { md: 3, xs: "5px" }, mt: { xs: "110px", md: "120px" } }}
     >
-      <Grid container spacing={4} alignItems="center">
+      <Grid container spacing={{ xs: 5, md: 4 }} alignItems="center">
         <Grid
           item
           xs={12}
           md={5}
           sx={{ position: "relative", order: { xs: 1, md: 2 } }}
         >
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            whileHover={{ scale: 1.03, rotate: 1.5 }}
-            transition={{ duration: 0.9, ease: "easeOut" }}
-            viewport={{ once: true }}
-          >
+          <motion.div variants={photo} initial="hidden" animate={state}>
             <CardWrapper width="100%" height="70%">
               <Box sx={{ borderRadius: "inherit", overflow: "hidden" }}>
                 <Box
                   component="img"
-                  src="assets/images/headerImg.png"
+                  src="/assets/images/headerImg.png"
                   alt="Najeeb Ullah"
                   sx={{
                     width: "100%",
@@ -63,95 +73,69 @@ const Header = () => {
           </motion.div>
         </Grid>
 
-        <Grid
-          item
-          xs={12}
-          md={7}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px",
-            order: { xs: 2, md: 1 },
-          }}
-        >
-          <Stack gap="20px">
-            <motion.div
-              variants={textVariant}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={0}
-            >
-              <Typography
-                variant="body2"
-                sx={{
-                  letterSpacing: { md: "3px", sm: "2px", xs: "1px" },
-                  textTransform: "uppercase",
-                  fontWeight: 500,
-                  fontSize: { xs: "12px", sm: "14px", md: "16px" },
-                }}
-              >
-                Welcome to my world
-              </Typography>
-            </motion.div>
+        <Grid item xs={12} md={7} sx={{ order: { xs: 2, md: 1 } }}>
+          <motion.div variants={stagger} initial="hidden" animate={state}>
+            <Stack gap={{ xs: "20px", md: "24px" }}>
+              <motion.div variants={item}>
+                <Typography
+                  sx={{
+                    letterSpacing: { md: "3px", xs: "2px" },
+                    textTransform: "uppercase",
+                    fontWeight: 600,
+                    fontSize: { xs: "12px", md: "14px" },
+                    color: COLORS.body,
+                  }}
+                >
+                  Welcome to my world
+                </Typography>
+              </motion.div>
 
-            <motion.div
-              variants={textVariant}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={1}
-            >
-              <AnimatedText />
-            </motion.div>
+              <motion.div variants={item}>
+                <AnimatedText />
+              </motion.div>
 
-            <motion.div
-              variants={textVariant}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={2}
-            >
-              <Typography
-                color={COLORS.bodyWhite}
-                variant="body1"
-                pr={{ md: "135px", xs: 0 }}
-                sx={{
-                  lineHeight: 1.8,
-                  fontSize: { xs: "14px", sm: "16px", md: "18px" },
-                }}
-              >
-                I’m a passionate{" "}
-                <strong style={{ color: COLORS.primary }}>
-                  MERN Stack Developer
-                </strong>{" "}
-                specializing in{" "}
-                <strong style={{ color: COLORS.primary }}>
-                  modern, user-friendly applications
-                </strong>{" "}
-                with clean code and creative solutions.
-              </Typography>
-            </motion.div>
-          </Stack>
+              <motion.div variants={item}>
+                <Typography
+                  pr={{ md: "80px", xs: 0 }}
+                  sx={{
+                    lineHeight: 1.8,
+                    fontSize: { xs: "15px", sm: "16px", md: "18px" },
+                  }}
+                >
+                  I’m a passionate <strong style={strong}>MERN Stack Developer</strong>{" "}
+                  specializing in{" "}
+                  <strong style={strong}>modern, user-friendly applications</strong>{" "}
+                  with clean code and creative solutions.
+                </Typography>
+              </motion.div>
 
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ delay: 0.6 }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: { xs: "column", sm: "row" },
-                gap: "20px",
-                justifyContent: "space-between",
-                mt: 2,
-              }}
-            >
-              <FindWithMe />
-            </Box>
+              <motion.div variants={item}>
+                <Stack direction="row" gap="16px" flexWrap="wrap">
+                  <CustomButton
+                    variant="primary"
+                    title="View My Work"
+                    fontsize="15px"
+                    height="52px"
+                    href="#portfolio"
+                    icon={<ArrowForward sx={{ fontSize: "18px" }} />}
+                  />
+                  <CustomButton
+                    title="Contact Me"
+                    fontsize="15px"
+                    height="52px"
+                    width="150px"
+                    hover
+                    href="#contact"
+                  />
+                </Stack>
+              </motion.div>
+
+              <motion.div variants={item}>
+                <Box sx={{ mt: { xs: 1, md: 2 } }}>
+                  <FindWithMe />
+                </Box>
+              </motion.div>
+            </Stack>
           </motion.div>
         </Grid>
       </Grid>

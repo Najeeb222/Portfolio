@@ -1,4 +1,10 @@
-import { CardWrapper, CustomButton, FindWithMe } from "@components/index";
+import {
+  CardWrapper,
+  CustomButton,
+  FindWithMe,
+  Reveal,
+  SectionHeading,
+} from "@components/index";
 import { COLORS } from "@constants/color";
 import { ArrowForward } from "@mui/icons-material";
 import {
@@ -72,27 +78,10 @@ const ContactWithMe = () => {
       component={"section"}
       id="contact"
     >
-      <Stack sx={{ textAlign: "center", gap: "20px" }}>
-        <Typography
-          variant="body2"
-          sx={{ letterSpacing: "2px", fontWeight: 500, color: COLORS.subtitle }}
-        >
-          Contact
-        </Typography>
-        <Typography
-          variant="h2"
-          sx={{
-            marginBottom: "30px",
-            fontWeight: "700",
-            fontSize: { md: "60px", xs: "34px", sm: "40px" },
-            color: COLORS.bodyWhite,
-          }}
-        >
-          Contact With Me
-        </Typography>
-      </Stack>
+      <SectionHeading eyebrow="Contact" title="Let's Work Together" />
       <Grid container spacing={{ md: 6, xs: 2 }} gap={"20px"} mx={"auto"}>
         <Grid item xs={12} sm={5}>
+          <Reveal style={{ height: "100%" }}>
           <CardWrapper
             width={"100%"}
             height={"100%"}
@@ -144,8 +133,10 @@ const ContactWithMe = () => {
               <FindWithMe />
             </Stack>
           </CardWrapper>
+          </Reveal>
         </Grid>
         <Grid item xs={12} sm={6.5}>
+          <Reveal delay={0.15}>
           <CardWrapper width="100%" height="auto" p={"20px"}>
             <form onSubmit={handleSubmit}>
               <Stack
@@ -237,6 +228,7 @@ const ContactWithMe = () => {
               />
             </form>
           </CardWrapper>
+          </Reveal>
         </Grid>
       </Grid>
 

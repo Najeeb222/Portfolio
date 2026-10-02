@@ -1,5 +1,4 @@
-import { CardWrapper } from "@components/index";
-import { COLORS } from "@constants/color";
+import { CardWrapper, Reveal, SectionHeading } from "@components/index";
 import {
   DesktopWindows,
   WifiOutlined,
@@ -8,18 +7,7 @@ import {
   Layers,
   DesignServices,
 } from "@mui/icons-material";
-import { Container, Grid, Stack, Typography } from "@mui/material";
-import { motion } from "motion/react";
-
-const cardVariant = {
-  hidden: { y: 50, opacity: 0 },
-  visible: (i: number) => ({
-    y: 0,
-    opacity: 1,
-    transition: { delay: i * 0.2, duration: 0.6, ease: "easeOut" },
-  }),
-  hover: { scale: 1.05, transition: { type: "spring", stiffness: 200 } },
-};
+import { Container, Grid, Typography } from "@mui/material";
 
 const Features = () => {
   return (
@@ -29,56 +17,36 @@ const Features = () => {
       maxWidth={"lg"}
       disableGutters
     >
-      <Stack sx={{ textAlign: { md: "start", xs: "center" } }}>
-        <Typography
-          variant="body2"
-          sx={{
-            fontWeight: "500",
-            letterSpacing: "2px",
-            color: COLORS.subtitle,
-            mb: "16px",
-          }}
-        >
-          FEATURES
-        </Typography>
-        <Typography
-          variant="h2"
-          sx={{
-            marginBottom: "30px",
-            fontWeight: "700",
-            fontSize: { md: "60px", xs: "34px", sm: "40px" },
-            color: COLORS.bodyWhite,
-          }}
-        >
-          What I Do
-        </Typography>
-      </Stack>
+      <SectionHeading eyebrow="Features" title="What I Do" align="start" />
 
       <Grid container spacing={3}>
         {FeaturesComponentData.map((item, index) => (
           <Grid item md={4} sm={6} xs={12} key={item.title}>
-            <motion.div
-              custom={index}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={cardVariant}
-              whileHover="hover"
-            >
+            <Reveal delay={(index % 3) * 0.1} style={{ height: "100%" }}>
               <CardWrapper
                 isArrow
                 topIcon={item.icon}
                 width={"auto"}
                 height={"100%"}
                 hover
-                p={{ md: "40px 50px", xs: "20px" }}
+                p={{ md: "40px 40px", xs: "24px" }}
               >
-                <Typography variant="h4" fontSize={"24px"} sx={{ mb: 1 }}>
+                <Typography
+                  variant="h4"
+                  className="hoverTitle"
+                  sx={{
+                    fontSize: "22px",
+                    fontWeight: 700,
+                    transition: "color 0.3s ease",
+                  }}
+                >
                   {item.title}
                 </Typography>
-                <Typography>{item.description}</Typography>
+                <Typography sx={{ lineHeight: 1.7 }}>
+                  {item.description}
+                </Typography>
               </CardWrapper>
-            </motion.div>
+            </Reveal>
           </Grid>
         ))}
       </Grid>

@@ -96,7 +96,12 @@ const PortfolioCard = ({ title, subtitle, description, score }: PortfolioCardPro
             <Stack gap="8px">
               <Typography
                 variant="h4"
-                sx={{ fontSize: { md: "24px", xs: "21px" }, fontWeight: 500 }}
+                className="hoverTitle"
+                sx={{
+                  fontSize: { md: "22px", xs: "20px" },
+                  fontWeight: 700,
+                  transition: "color 0.3s ease",
+                }}
               >
                 {title}
               </Typography>

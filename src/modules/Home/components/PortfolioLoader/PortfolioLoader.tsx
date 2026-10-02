@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { styled, Box, Typography } from "@mui/material";
 import { motion, AnimatePresence } from "motion/react";
 import { COLORS } from "@constants/color";
+import { EASE_OUT } from "@constants/motion";
 
 // --- BANTER LOADER ANIMATIONS ---
 /**
@@ -96,7 +97,7 @@ const RoleText = styled(Typography)(() => ({
   opacity: 0.8,
 }));
 
-const ProgressBar = styled(motion.div)({
+const ProgressTrack = styled(Box)({
   position: "absolute",
   bottom: "-20px",
   left: "50%",
@@ -106,188 +107,99 @@ const ProgressBar = styled(motion.div)({
   background: "rgba(255,1,79,0.1)",
   borderRadius: "4px",
   overflow: "hidden",
-  "&::after": {
-    content: '""',
-    position: "absolute",
-    top: 0,
-    left: 0,
-    height: "100%",
-    width: "var(--progress)",
-    background: `linear-gradient(90deg, ${COLORS.primary}, #ff4d7f)`,
-    borderRadius: "4px",
-    animation: "progressPulse 1.5s ease infinite",
-  },
-  "@keyframes progressPulse": {
-    "0%, 100%": { opacity: 1 },
-    "50%": { opacity: 0.7 },
-  },
+});
+
+const ProgressFill = styled(motion.div)({
+  height: "100%",
+  background: `linear-gradient(90deg, ${COLORS.primary}, #ff4d7f)`,
+  borderRadius: "4px",
 });
 
 // --- COMPONENT ---
 
 interface PortfolioLoaderProps {
-  onLoadingComplete?: () => void;
+  visible: boolean;
+  onDone?: () => void;
   minDisplayTime?: number;
-  loadingProgress?: number;
 }
 
 const PortfolioLoader: React.FC<PortfolioLoaderProps> = ({
-  onLoadingComplete,
-  minDisplayTime = 3000,
-  loadingProgress = 0,
+  visible,
+  onDone,
+  minDisplayTime = 1100,
 }) => {
-  const [isVisible, setIsVisible] = useState(true);
-  const [progress, setProgress] = useState(0);
-
   useEffect(() => {
+    if (!visible) return;
+
     document.body.style.overflow = "hidden";
-
-    const timer = setTimeout(() => {
-      setIsVisible(false);
-      setTimeout(() => {
-        onLoadingComplete?.();
-      }, 800);
-    }, minDisplayTime);
-
-    let interval: NodeJS.Timeout;
-
-    // Simulate progress if not provided
-    if (loadingProgress === 0) {
-      interval = setInterval(() => {
-        setProgress((prev) => {
-          const newProgress = prev + Math.random() * 15;
-          return newProgress >= 100 ? 100 : newProgress;
-        });
-      }, 400);
-    } else {
-      setProgress(loadingProgress);
-    }
+    const timer = setTimeout(() => onDone?.(), minDisplayTime);
 
     return () => {
       clearTimeout(timer);
-      if (interval) clearInterval(interval);
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
     };
-  }, [onLoadingComplete, minDisplayTime, loadingProgress]);
+  }, [visible, onDone, minDisplayTime]);
 
-  // Enhanced Framer Motion Variants for the grid boxes
+  // Grid boxes morph in a staggered wave
   const boxVariants = (index: number) => ({
     animate: {
       scale: [1, 1.2, 0.9, 1.1, 1],
       rotate: [0, 0, 180, 180, 0],
       borderRadius: ["4px", "20px", "50%", "12px", "4px"],
-      backgroundColor: [
-        COLORS.primary,
-        "#ff6b9d", // secondary/lighter primary
-        COLORS.primary,
-      ],
-      y: [0, -5, 0, 5, 0],
+      backgroundColor: [COLORS.primary, "#ff6b9d", COLORS.primary],
       transition: {
-        duration: 2.5,
+        duration: 1.6,
         repeat: Infinity,
-        ease: "circInOut",
-        delay: index * 0.08,
+        ease: "circInOut" as const,
+        delay: index * 0.05,
         times: [0, 0.2, 0.4, 0.6, 1],
       },
     },
   });
 
-  // Container animation for entrance
-  const containerVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  // Text animation variants
-  const textVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
-
   return (
-    <AnimatePresence mode="wait">
-      {isVisible && (
+    <AnimatePresence>
+      {visible && (
         <LoaderOverlay
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 1 }}
           exit={{
             opacity: 0,
-            y: -20,
-            transition: { duration: 0.8, ease: [0.645, 0.045, 0.355, 1] },
+            transition: { duration: 0.5, ease: EASE_OUT },
           }}
         >
           <BackgroundPattern />
 
           <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, y: -16, transition: { duration: 0.4 } }}
+            transition={{ duration: 0.4, ease: EASE_OUT }}
           >
             <BanterLoaderContainer>
               {[...Array(9)].map((_, i) => (
-                <BoxElement
-                  key={i}
-                  variants={boxVariants(i)}
-                  animate="animate"
-                  whileHover={{ scale: 1.1 }}
-                />
+                <BoxElement key={i} variants={boxVariants(i)} animate="animate" />
               ))}
             </BanterLoaderContainer>
 
             <BrandingWrapper
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
+              transition={{ delay: 0.15, duration: 0.5, ease: EASE_OUT }}
             >
-              <motion.div variants={textVariants}>
-                <NameText>Najeeb</NameText>
-              </motion.div>
+              <NameText>Najeeb</NameText>
+              <RoleText>MERN Stack Developer</RoleText>
 
-              <motion.div variants={textVariants} transition={{ delay: 0.2 }}>
-                <RoleText>MERN Stack Developer</RoleText>
-              </motion.div>
-
-              <ProgressBar
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8 }}
-                style={
-                  { "--progress": `${progress}%` } as React.CSSProperties
-                }
-              />
+              <ProgressTrack>
+                <ProgressFill
+                  initial={{ width: "0%" }}
+                  animate={{ width: "100%" }}
+                  transition={{
+                    duration: minDisplayTime / 1000,
+                    ease: "easeInOut",
+                  }}
+                />
+              </ProgressTrack>
             </BrandingWrapper>
-          </motion.div>
-
-          {/* Loading percentage */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.6 }}
-            transition={{ delay: 0.8 }}
-            style={{
-              position: "absolute",
-              bottom: 40,
-              right: 40,
-              fontSize: "0.8rem",
-              color: COLORS.primary,
-              fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 500,
-            }}
-          >
-            {Math.round(progress)}%
           </motion.div>
         </LoaderOverlay>
       )}

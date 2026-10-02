@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { TypeAnimation } from "react-type-animation";
 import { COLORS } from "@constants/color";
 
@@ -7,56 +7,49 @@ const AnimatedText = () => {
     <Typography
       variant="h1"
       sx={{
-        fontSize: { xs: "24px", sm: "32px", md: "50px" },
-        fontWeight: 700,
-        lineHeight: 1.2,
-        textAlign: { xs: "center", md: "left" },
+        fontSize: { xs: "34px", sm: "44px", md: "56px" },
+        fontWeight: 800,
+        lineHeight: 1.15,
+        color: COLORS.headingWv,
       }}
     >
       Hi, I’m{" "}
-      <Typography
-        component="span"
-        sx={{
-          color: COLORS.primary,
-          fontSize: { xs: "24px", sm: "32px", md: "50px" },
-          fontWeight: 700,
-        }}
-      >
+      <Box component="span" sx={{ color: COLORS.primary }}>
         Najeeb Ullah
-      </Typography>
-      <br />
-      <Typography
+      </Box>
+      {/* Own line with a fixed height + no wrapping, so the text below never jumps while typing */}
+      <Box
         component="span"
         sx={{
-          color: COLORS.primary,
-          fontSize: { xs: "24px", sm: "32px", md: "50px" },
+          display: "block",
+          mt: "8px",
+          minHeight: "1.3em",
+          whiteSpace: "nowrap",
+          fontSize: { xs: "21px", sm: "30px", md: "36px" },
           fontWeight: 700,
+          color: COLORS.bodyWhite,
+          "& .type-cursor::after": { color: COLORS.primary },
         }}
       >
         a{" "}
-      </Typography>
-      <TypeAnimation
-        sequence={[
-          "MERN Stack Developer.",
-          1500,
-          "Professional Coder.",
-          1500,
-          "Next.js Developer.",
-          1500,
-          "React Developer.",
-          1500,
-        ]}
-        wrapper="span"
-        speed={60}
-        deletionSpeed={70}
-        repeat={Infinity}
-        style={{
-          display: "inline-block",
-          fontSize: "inherit",
-          fontWeight: 700,
-          color: COLORS.primary,
-        }}
-      />
+        <TypeAnimation
+          sequence={[
+            "MERN Stack Developer.",
+            1500,
+            "Full-Stack Developer.",
+            1500,
+            "Next.js Developer.",
+            1500,
+            "React Developer.",
+            1500,
+          ]}
+          wrapper="span"
+          className="type-cursor"
+          speed={60}
+          deletionSpeed={70}
+          repeat={Infinity}
+        />
+      </Box>
     </Typography>
   );
 };

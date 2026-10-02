@@ -13,8 +13,9 @@ type Props = {
   downloadLink?: string; // 🔥 File URL
   fileName?: string; // 🔥 Downloaded file name
   type?: "button" | "submit" | "reset";
-  href?: string; // External link, opened in a new tab
+  href?: string; // External URLs open in a new tab, "#section" links scroll in place
   ariaLabel?: string;
+  variant?: "default" | "primary"; // primary = solid red call-to-action
 };
 
 const CustomButton = ({
@@ -30,15 +31,19 @@ const CustomButton = ({
   type,
   href,
   ariaLabel,
+  variant = "default",
 }: Props) => {
   const isLink = Boolean(downloadLink || href);
+  const isExternal = Boolean(href?.startsWith("http"));
+  const isPrimary = variant === "primary";
+
   return (
     <Button
       component={isLink ? "a" : "button"}
       href={downloadLink || href || undefined}
       download={downloadLink ? fileName || true : undefined} // ✅ Only apply if downloadLink exists
-      target={href ? "_blank" : undefined}
-      rel={href ? "noopener noreferrer" : undefined}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
       aria-label={ariaLabel}
       onClick={onClick}
       type={type}
@@ -46,22 +51,33 @@ const CustomButton = ({
         height: height ? height : "auto",
         width: width ? width : "auto",
         border: "none",
-        boxShadow: shadows.shadowWhite3,
-        background: COLORS.gradients.gradientBoxW,
+        boxShadow: isPrimary
+          ? "0 10px 20px -8px rgba(255, 1, 79, 0.6)"
+          : shadows.shadowWhite3,
+        background: isPrimary
+          ? COLORS.primary
+          : COLORS.gradients.gradientBoxW,
         borderRadius: "10px",
         transition: "all 0.3s ease",
         textTransform: "none",
-        color: COLORS.primary,
+        color: isPrimary ? COLORS.white : COLORS.primary,
         position: "relative",
         overflow: "hidden",
         fontWeight: 600,
-        padding: "10px",
+        padding: isPrimary ? "12px 24px" : "10px",
+        gap: "8px",
         "&:hover": {
-          transform: "translateY(-5px)",
-          color: COLORS.white,
-          background: hover
-            ? COLORS.gradients.gradientRedHover
-            : COLORS.gradients.gradientBoxW,
+          transform: "translateY(-3px)",
+          color: isPrimary || hover ? COLORS.white : COLORS.primary,
+          background: isPrimary
+            ? "#e6003f"
+            : hover
+              ? COLORS.gradients.gradientRedHover
+              : COLORS.gradients.gradientBoxW,
+        },
+        "&:focus-visible": {
+          outline: `2px solid ${COLORS.primary}`,
+          outlineOffset: "3px",
         },
         "& > *": {
           position: "relative",
@@ -71,7 +87,12 @@ const CustomButton = ({
     >
       {title && (
         <Typography
-          sx={{ fontSize: fontsize ? fontsize : "13px", fontWeight: 500 }}
+          component="span"
+          sx={{
+            fontSize: fontsize ? fontsize : "13px",
+            fontWeight: isPrimary ? 600 : 500,
+            fontFamily: "inherit",
+          }}
         >
           {title}
         </Typography>
