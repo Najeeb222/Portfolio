@@ -1,0 +1,96 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@hooks/*": [
+        "src/hooks/*"
+      ],
+      "@contexts/*": [
+        "src/contexts/*"
+      ],
+      "@services/*": [
+        "src/services/*"
+      ],
+      "@constants/*": [
+        "src/constants/*"
+      ],
+      "@libs/*": [
+        "src/libs/*"
+      ],
+      "@hocs/*": [
+        "src/hocs/*"
+      ],
+      "@modules/*": [
+        "src/modules/*"
+      ],
+      "@layouts/*": [
+        "src/layout/*"
+      ],
+      "@models/*": [
+        "src/models/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ],
+      "@screens/*": [
+        "src/screens/*"
+      ],
+      "@validations/*": [
+        "src/validations/*"
+      ],
+      "@actions/*": [
+        "src/actions/*"
+      ],
+      "@databaseServices/*": [
+        "src/databaseServices/*"
+      ],
+      "@appServices/*": [
+        "src/appServices/*"
+      ],
+      "@collections/*": [
+        "src/collections/*"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
