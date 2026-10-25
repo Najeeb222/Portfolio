@@ -127,6 +127,7 @@ const PortfolioLoader = ({ minDisplayTime = 1100 }: { minDisplayTime?: number })
   useEffect(() => {
     try {
       if (sessionStorage.getItem(INTRO_KEY) === "1") {
+        document.body.style.overflow = "";
         setVisible(false);
         return;
       }
@@ -141,6 +142,7 @@ const PortfolioLoader = ({ minDisplayTime = 1100 }: { minDisplayTime?: number })
       } catch {
         // Storage can be blocked in private browsing modes.
       }
+      document.body.style.overflow = "";
       setVisible(false);
     }, minDisplayTime);
 
