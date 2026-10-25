@@ -1,5 +1,5 @@
 import { COLORS } from "@constants/color";
-import { Box, Grid, LinearProgress, Stack, Typography } from "@mui/material";
+import { Box, Grid, LinearProgress, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -28,30 +28,6 @@ const SkillSection: React.FC<SkillSectionProps> = ({ skills }) => {
 
   return (
     <Box ref={ref} sx={{ mb: "20px" }}>
-      <Stack sx={{ gap: "15px", my: "30px", p: 2 }}>
-        <Typography
-          variant="body2"
-          sx={{
-            letterSpacing: "2px",
-            fontWeight: 500,
-            color: COLORS.subtitle,
-            fontSize: { xs: "12px", sm: "14px", md: "16px" },
-          }}
-        >
-          Skills
-        </Typography>
-        <Typography
-          variant="h2"
-          sx={{
-            color: COLORS.bodyWhite,
-            fontWeight: "700",
-            fontSize: { xs: "24px", sm: "28px", md: "36px", lg: "40px" },
-          }}
-        >
-          Development Skill
-        </Typography>
-      </Stack>
-
       <Grid container spacing={4} p={2}>
         {skills.map((skill, index) => (
           <Grid item xs={12} sm={6}  key={index}>

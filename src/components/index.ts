@@ -8,3 +8,4 @@ export { default as FindWithMe } from "./FindWithMe/FindWithMe";
 export { default as Reveal } from "./Reveal/Reveal";
 export { default as SectionHeading } from "./SectionHeading/SectionHeading";
 export { default as ProjectDialog } from "./ProjectDialog/ProjectDialog";
+export { default as FeaturedProject } from "./FeaturedProject/FeaturedProject";

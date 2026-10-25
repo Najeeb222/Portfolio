@@ -29,9 +29,13 @@ export const navItems = [
   { title: "HOME", path: "#home" },
   { title: "FEATURES", path: "#features" },
   { title: "PORTFOLIO", path: "#portfolio" },
-  { title: "RESUME", path: "#resume" },
+  { title: "EXPERIENCE", path: "#experience" },
+  { title: "SKILLS", path: "#skills" },
   { title: "CONTACT", path: "#contact" },
 ];
+
+export const projectGroups = ["Client Websites", "SaaS & Dashboards", "Web Apps"] as const;
+export type ProjectGroup = (typeof projectGroups)[number];
 
 export type Project = {
   id: number;
@@ -39,6 +43,7 @@ export type Project = {
   title: string;
   image: string;
   link: string;
+  group: ProjectGroup; // Used by the filter tabs
   linkLabel?: string; // Button text in the details dialog
   status?: string; // Optional badge, e.g. "In progress"
   description: string;
@@ -51,6 +56,7 @@ export const portfolioData: Project[] = [
     id: 1,
     category: "HEALTHCARE · WELLNESS",
     title: "Medilife Wellness Clinic",
+    group: "Client Websites",
     image: "/assets/images/projects/medilifeclinic.jpg",
     link: "https://medilifewellnessclinic.ae/en/",
     description:
@@ -68,6 +74,7 @@ export const portfolioData: Project[] = [
     id: 2,
     category: "HEALTHCARE · MIGRATION",
     title: "Medilife Global Healthcare",
+    group: "Client Websites",
     image: "/assets/images/projects/medilifeglobal.jpg",
     link: "https://salmon-coyote-626864.hostingersite.com/",
     linkLabel: "View Staging Site",
@@ -87,6 +94,7 @@ export const portfolioData: Project[] = [
     id: 3,
     category: "SAAS APPLICATION",
     title: "StoreMate POS SaaS",
+    group: "SaaS & Dashboards",
     image: "/assets/images/projects/storemate.jpg",
     link: "https://storemate-test.onrender.com/",
     description:
@@ -104,6 +112,7 @@ export const portfolioData: Project[] = [
     id: 4,
     category: "ADMIN DASHBOARD",
     title: "E-Commerce Admin Dashboard",
+    group: "SaaS & Dashboards",
     image: "/assets/images/projects/ecommerce.jpg",
     link: "https://e-commerce-admin-lovat.vercel.app/",
     description:
@@ -119,6 +128,7 @@ export const portfolioData: Project[] = [
     id: 5,
     category: "LEARNING PLATFORM",
     title: "Soofy Language Learning",
+    group: "Web Apps",
     image: "/assets/images/projects/soofiy.jpg",
     link: "https://soofiy-io-pi.vercel.app",
     description:
@@ -134,6 +144,7 @@ export const portfolioData: Project[] = [
     id: 6,
     category: "BUSINESS WEBSITE",
     title: "Nexzon Shipping & Sourcing",
+    group: "Client Websites",
     image: "/assets/images/projects/nexzon.jpg",
     link: "https://nexzon-shipping.vercel.app/",
     description:
@@ -148,8 +159,28 @@ export const portfolioData: Project[] = [
   },
   {
     id: 7,
+    category: "E-COMMERCE STORE",
+    title: "Mir Cloths Fashion Store",
+    group: "Web Apps",
+    image: "/assets/images/projects/mircloths.jpg",
+    link: "https://mir-cloths.vercel.app/",
+    description:
+      "Online clothing store for men, women and kids, with category banners, a filterable product catalogue, seasonal collections and sale promotions.",
+    features: [
+      "Category banners for women, men and kids collections",
+      "Product grid with Men, Women and Kids filters and sale badges",
+      "Collection slider plus Hot Trend, Best Seller and Featured lists",
+      "Live countdown timer for discount campaigns",
+      "WhatsApp chat button and store service highlights",
+    ],
+    tech: ["React", "Vite", "Responsive UI"],
+  },
+
+  {
+    id: 8,
     category: "SOCIAL PLATFORM",
     title: "Single Muslim Dating App",
+    group: "Web Apps",
     image: "/assets/images/dating.jpg",
     link: "https://single-muslim.vercel.app/",
     description:
@@ -162,9 +193,10 @@ export const portfolioData: Project[] = [
     tech: ["React"],
   },
   {
-    id: 8,
+    id: 9,
     category: "CHAT APPLICATION",
     title: "Real-Time Chat App",
+    group: "Web Apps",
     image: "/assets/images/chating.jpg",
     link: "https://chat-a-pp-xi.vercel.app",
     description:
@@ -177,9 +209,10 @@ export const portfolioData: Project[] = [
     tech: ["React", "Firebase"],
   },
   {
-    id: 9,
+    id: 10,
     category: "AUTHENTICATION",
     title: "Travelwise Login & Auth",
+    group: "Web Apps",
     image: "/assets/images/projects/auth.jpg",
     link: "https://auth-ten-chi.vercel.app/login",
     description:

@@ -14,7 +14,9 @@ const Reveal = ({ children, delay = 0, y = 24, style }: Props) => {
     <motion.div
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      // Trigger as soon as the block's top edge is ~60px into view. A percentage threshold
+      // never fires for blocks taller than the screen (e.g. long sections on phones).
+      viewport={{ once: true, amount: "some", margin: "0px 0px -60px 0px" }}
       transition={{ duration: DURATION.base, ease: EASE_OUT, delay }}
       style={style}
     >

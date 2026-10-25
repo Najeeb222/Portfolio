@@ -1,7 +1,7 @@
 import { COLORS } from "@constants/color";
 import type { Project } from "@constants/data";
 import { shadows } from "@constants/shadow";
-import { OpenInFull } from "@mui/icons-material";
+import { ArrowForward, OpenInFull } from "@mui/icons-material";
 import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 };
 
 const CustomCard = ({ project, onOpen }: Props) => {
-  const { image, category, title, tech, status } = project;
+  const { image, category, title, description, tech, status } = project;
 
   return (
     <Box
@@ -34,11 +34,13 @@ const CustomCard = ({ project, onOpen }: Props) => {
         "& .overlay": { transition: "opacity 0.4s ease" },
         "& .pill": { transition: "transform 0.4s ease" },
         "& .title": { transition: "color 0.3s ease" },
+        "& .moreIcon": { transition: "transform 0.3s ease" },
+        "&:hover .moreIcon, &:focus-visible .moreIcon": { transform: "translateX(4px)" },
         "&:hover .card, &:focus-visible .card": {
           transform: "translateY(-6px)",
           boxShadow: shadows.shadowWhiteHover,
         },
-        "&:hover .shot, &:focus-visible .shot": { transform: "scale(1.06)" },
+        "&:hover .shot, &:focus-visible .shot": { transform: "scale(1.04)" },
         "&:hover .overlay, &:focus-visible .overlay": { opacity: 1 },
         "&:hover .pill, &:focus-visible .pill": { transform: "translateY(0)" },
         "&:hover .title, &:focus-visible .title": { color: COLORS.primary },
@@ -167,7 +169,21 @@ const CustomCard = ({ project, onOpen }: Props) => {
             {title}
           </Typography>
 
-          <Stack direction="row" gap="6px" flexWrap="wrap" sx={{ mt: "2px" }}>
+          <Typography
+            sx={{
+              fontSize: "14.5px",
+              lineHeight: 1.65,
+              color: COLORS.bodyWhite,
+              display: "-webkit-box",
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+            }}
+          >
+            {description}
+          </Typography>
+
+          <Stack direction="row" gap="6px" flexWrap="wrap" sx={{ mt: "auto", pt: "6px" }}>
             {tech.slice(0, 3).map((t) => (
               <Box
                 key={t}
@@ -185,6 +201,18 @@ const CustomCard = ({ project, onOpen }: Props) => {
                 {t}
               </Box>
             ))}
+          </Stack>
+
+          <Stack
+            direction="row"
+            alignItems="center"
+            gap="6px"
+            sx={{ pt: "14px", mt: "4px", borderTop: `1px solid ${COLORS.border}` }}
+          >
+            <Typography sx={{ fontSize: "14px", fontWeight: 600, color: COLORS.headingWv }}>
+              View details
+            </Typography>
+            <ArrowForward className="moreIcon" sx={{ fontSize: 17, color: COLORS.primary }} />
           </Stack>
         </CardContent>
       </Card>

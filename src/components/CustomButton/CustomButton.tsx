@@ -64,7 +64,7 @@ const CustomButton = ({
         position: "relative",
         overflow: "hidden",
         fontWeight: 600,
-        padding: isPrimary ? "12px 24px" : "10px",
+        padding: isPrimary ? "12px 24px" : title ? "10px 20px" : "10px",
         gap: "8px",
         "&:hover": {
           transform: "translateY(-3px)",

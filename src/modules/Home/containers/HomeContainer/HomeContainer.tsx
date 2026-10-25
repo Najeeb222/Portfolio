@@ -1,6 +1,7 @@
 import { AppLayout } from "@layouts/index";
 import {
   ContactWithMe,
+  Experience,
   Features,
   Header,
   MyPortfolio,
@@ -44,6 +45,8 @@ const HomeContainer = () => {
           <Features />
           <Divider />
           <MyPortfolio />
+          <Divider />
+          <Experience />
           <Divider />
           <MyResume />
           <Divider />
