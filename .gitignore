@@ -1,6 +1,7 @@
 # Node modules
 node_modules/
 .vite/
+.next/
 
 # Logs
 npm-debug.log*
@@ -31,4 +32,3 @@ Thumbs.db
 .eslintcache
 jest-cache/
 jest-transform-cache/
-

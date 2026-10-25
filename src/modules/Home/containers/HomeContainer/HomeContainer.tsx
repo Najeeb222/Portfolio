@@ -1,3 +1,5 @@
+"use client";
+
 import { AppLayout } from "@layouts/index";
 import {
   ContactWithMe,
@@ -9,21 +11,21 @@ import {
   PortfolioLoader,
 } from "@modules/Home/components";
 import { Divider, Stack } from "@mui/material";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 // The intro loader only plays on the first visit of a browser session
 const INTRO_KEY = "intro-seen";
 
-const hasSeenIntro = () => {
-  try {
-    return sessionStorage.getItem(INTRO_KEY) === "1";
-  } catch {
-    return false;
-  }
-};
-
 const HomeContainer = () => {
-  const [showIntro, setShowIntro] = useState(() => !hasSeenIntro());
+  const [showIntro, setShowIntro] = useState(true);
+
+  useEffect(() => {
+    try {
+      setShowIntro(sessionStorage.getItem(INTRO_KEY) !== "1");
+    } catch {
+      setShowIntro(true);
+    }
+  }, []);
 
   const handleIntroDone = useCallback(() => {
     try {
