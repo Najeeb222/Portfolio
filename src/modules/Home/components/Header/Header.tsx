@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import AnimatedText from "../AnimatedText/AnimatedText";
 import { FindWithMe, CardWrapper, CustomButton } from "@components/index";
@@ -5,6 +7,7 @@ import { COLORS } from "@constants/color";
 import { DURATION, EASE_OUT } from "@constants/motion";
 import { ArrowForward } from "@mui/icons-material";
 import { motion } from "motion/react";
+import Image from "next/image";
 
 // Children reveal one after another once the intro loader is gone
 const stagger = {
@@ -57,16 +60,14 @@ const Header = ({ ready = true }: Props) => {
           <motion.div variants={photo} initial="hidden" animate={state}>
             <CardWrapper width="100%" height="70%">
               <Box sx={{ borderRadius: "inherit", overflow: "hidden" }}>
-                <Box
-                  component="img"
+                <Image
                   src="/assets/images/headerImg.png"
                   alt="Najeeb Ullah"
-                  sx={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    display: "block",
-                  }}
+                  width={500}
+                  height={500}
+                  priority
+                  sizes="(max-width: 900px) 100vw, 40vw"
+                  style={{ width: "100%", height: "auto", objectFit: "cover", display: "block" }}
                 />
               </Box>
             </CardWrapper>

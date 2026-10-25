@@ -1,3 +1,5 @@
+"use client";
+
 import { COLORS } from "@constants/color";
 import { Box, Grid, LinearProgress, Typography } from "@mui/material";
 import { useEffect, useState } from "react";

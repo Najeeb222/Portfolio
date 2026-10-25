@@ -1,3 +1,5 @@
+"use client";
+
 import { DURATION, EASE_OUT } from "@constants/motion";
 import { motion } from "motion/react";
 

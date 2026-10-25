@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -15,6 +17,7 @@ import { COLORS } from "@constants/color";
 import { CustomButton, FindWithMe } from "@components/index";
 import { Close } from "@mui/icons-material";
 import { navItems } from "@constants/data";
+import Image from "next/image";
 
 const drawerWidth = 320;
 
@@ -64,19 +67,7 @@ export default function Navbar() {
             alignItems={"center"}
             gap={"20px"}
           >
-            <Box
-              component={"img"}
-              src="/assets/images/headerImg.png"
-              alt="logo"
-              width={"100px"}
-              height={"100px"}
-              sx={{
-                borderRadius: "50%",
-                objectFit: "cover",
-                border: `1px solid ${COLORS.danger}`,
-                // rotate: "180deg",
-              }}
-            />
+            <Image src="/assets/images/headerImg.png" alt="Najeeb Ullah" width={100} height={100} style={{ borderRadius: "50%", objectFit: "cover", border: `1px solid ${COLORS.danger}` }} />
             <CustomButton
               width={"auto"}
               height={"50px"}
@@ -176,20 +167,7 @@ export default function Navbar() {
                 width: "100%",
               }}
             >
-              <Box
-                component={"img"}
-                src="/assets/images/headerImg.png"
-                alt="Logo"
-                width={"100%"}
-                height={"100%"}
-                sx={{
-                  height: "70px",
-                  width: "70px",
-                  objectFit: "cover",
-                  borderRadius: "50%",
-                  border: `1px solid ${COLORS.danger}`,
-                }}
-              />
+              <Image src="/assets/images/headerImg.png" alt="Najeeb Ullah" width={100} height={100} style={{ borderRadius: "50%", objectFit: "cover", border: `1px solid ${COLORS.danger}` }} />
 
               {/* 🔹 Desktop Nav */}
               <Box

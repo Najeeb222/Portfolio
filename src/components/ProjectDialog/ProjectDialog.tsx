@@ -1,3 +1,5 @@
+"use client";
+
 import CustomButton from "@components/CustomButton/CustomButton";
 import { COLORS } from "@constants/color";
 import type { Project } from "@constants/data";
@@ -16,6 +18,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { motion } from "motion/react";
+import Image from "next/image";
 
 type Props = {
   project: Project | null;
@@ -146,20 +149,20 @@ const ProjectDialog = ({ project, open, onClose, onExited }: Props) => {
                       {hostOf(project.link)}
                     </Typography>
                   </Stack>
-                  <motion.img
-                    src={project.image}
-                    alt={`${project.title} screenshot`}
+                  <motion.div
                     initial={{ scale: 1.04, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ duration: DURATION.slow, ease: EASE_OUT }}
-                    style={{
-                      display: "block",
-                      width: "100%",
-                      aspectRatio: "16 / 10",
-                      objectFit: "cover",
-                      objectPosition: "top",
-                    }}
-                  />
+                    style={{ position: "relative", width: "100%", aspectRatio: "16 / 10" }}
+                  >
+                    <Image
+                      src={project.image}
+                      alt={`${project.title} screenshot`}
+                      fill
+                      sizes="(max-width: 900px) 100vw, 50vw"
+                      style={{ objectFit: "cover", objectPosition: "top" }}
+                    />
+                  </motion.div>
                 </Box>
               </Box>
             </Grid>

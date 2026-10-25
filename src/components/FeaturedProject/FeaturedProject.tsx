@@ -4,6 +4,7 @@ import type { Project } from "@constants/data";
 import { shadows } from "@constants/shadow";
 import { ArrowForward, NorthEast } from "@mui/icons-material";
 import { Box, Grid, Stack, Typography } from "@mui/material";
+import Image from "next/image";
 
 type Props = {
   project: Project;
@@ -82,21 +83,8 @@ const FeaturedProject = ({ project, onOpen, reverse }: Props) => {
                 {hostOf(link)}
               </Typography>
             </Stack>
-            <Box sx={{ overflow: "hidden" }}>
-              <Box
-                className="shot"
-                component="img"
-                src={image}
-                alt={`${title} screenshot`}
-                loading="lazy"
-                sx={{
-                  display: "block",
-                  width: "100%",
-                  aspectRatio: "16 / 10",
-                  objectFit: "cover",
-                  objectPosition: "top",
-                }}
-              />
+            <Box sx={{ overflow: "hidden", position: "relative", aspectRatio: "16 / 10" }}>
+              <Image className="shot" src={image} alt={`${title} screenshot`} fill sizes="(max-width: 900px) 100vw, 60vw" style={{ objectFit: "cover", objectPosition: "top" }} />
             </Box>
           </Box>
         </Grid>

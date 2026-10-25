@@ -1,5 +1,6 @@
 import { COLORS } from "@constants/color";
-import { Box, Stack, Typography, } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
+import Image from "next/image";
 
 const Footer = () => {
   return (
@@ -14,12 +15,7 @@ const Footer = () => {
       }}
     >
      
-      <Box
-        component="img"
-        src="assets/images/headerImg.png"
-        alt="Najeeb Ullah Logo"
-        sx={{ width: '70px', height: "70px",borderRadius:'50%',border:`1px solid ${COLORS.danger}`,objectFit:'cover' }}
-      />
+      <Image src="/assets/images/headerImg.png" alt="Najeeb Ullah" width={70} height={70} style={{ borderRadius: "50%", objectFit: "cover", border: `1px solid ${COLORS.danger}` }} />
 
    
       <Typography

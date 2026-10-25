@@ -3,6 +3,7 @@ import type { Project } from "@constants/data";
 import { shadows } from "@constants/shadow";
 import { ArrowForward, OpenInFull } from "@mui/icons-material";
 import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
+import Image from "next/image";
 
 type Props = {
   project: Project;
@@ -67,22 +68,10 @@ const CustomCard = ({ project, onOpen }: Props) => {
             position: "relative",
             overflow: "hidden",
             borderRadius: "8px",
+            aspectRatio: "16 / 10",
           }}
         >
-          <Box
-            className="shot"
-            component="img"
-            src={image}
-            alt={title}
-            loading="lazy"
-            sx={{
-              display: "block",
-              width: "100%",
-              aspectRatio: "16 / 10",
-              objectFit: "cover",
-              objectPosition: "top",
-            }}
-          />
+          <Image className="shot" src={image} alt={title} fill sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ objectFit: "cover", objectPosition: "top" }} />
           {status && (
             <Box
               sx={{

@@ -1,3 +1,5 @@
+"use client";
+
 // PortfolioCard.tsx
 import CardWrapper from "@components/CardWrapper/CardWrapper";
 import { COLORS } from "@constants/color";

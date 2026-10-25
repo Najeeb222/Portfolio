@@ -1,7 +1,7 @@
 import { createTheme } from "@mui/material";
 import { COLORS } from "@constants/color";
 
-const headingFont = '"Montserrat", sans-serif';
+const headingFont = 'var(--font-montserrat), sans-serif';
 
 export const theme = createTheme({
   palette: {
@@ -10,7 +10,7 @@ export const theme = createTheme({
     background: { default: "#ecf0f3" },
   },
   typography: {
-    fontFamily: '"Inter", sans-serif',
+    fontFamily: 'var(--font-inter), sans-serif',
     h1: { fontFamily: headingFont },
     h2: { fontFamily: headingFont },
     h3: { fontFamily: headingFont },

@@ -1,4 +1,6 @@
-import { useEffect } from "react";
+"use client";
+
+import { useEffect, useState } from "react";
 import { styled, Box, Typography } from "@mui/material";
 import { motion, AnimatePresence } from "motion/react";
 import { COLORS } from "@constants/color";
@@ -117,28 +119,36 @@ const ProgressFill = styled(motion.div)({
 
 // --- COMPONENT ---
 
-interface PortfolioLoaderProps {
-  visible: boolean;
-  onDone?: () => void;
-  minDisplayTime?: number;
-}
+const INTRO_KEY = "intro-seen";
 
-const PortfolioLoader: React.FC<PortfolioLoaderProps> = ({
-  visible,
-  onDone,
-  minDisplayTime = 1100,
-}) => {
+const PortfolioLoader = ({ minDisplayTime = 1100 }: { minDisplayTime?: number }) => {
+  const [visible, setVisible] = useState(true);
+
   useEffect(() => {
-    if (!visible) return;
+    try {
+      if (sessionStorage.getItem(INTRO_KEY) === "1") {
+        setVisible(false);
+        return;
+      }
+    } catch {
+      // Continue with the intro when storage is unavailable.
+    }
 
     document.body.style.overflow = "hidden";
-    const timer = setTimeout(() => onDone?.(), minDisplayTime);
+    const timer = window.setTimeout(() => {
+      try {
+        sessionStorage.setItem(INTRO_KEY, "1");
+      } catch {
+        // Storage can be blocked in private browsing modes.
+      }
+      setVisible(false);
+    }, minDisplayTime);
 
     return () => {
-      clearTimeout(timer);
+      window.clearTimeout(timer);
       document.body.style.overflow = "";
     };
-  }, [visible, onDone, minDisplayTime]);
+  }, [minDisplayTime]);
 
   // Grid boxes morph in a staggered wave
   const boxVariants = (index: number) => ({

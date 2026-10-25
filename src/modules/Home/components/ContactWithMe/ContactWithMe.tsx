@@ -1,3 +1,5 @@
+"use client";
+
 import {
   CardWrapper,
   CustomButton,
@@ -19,6 +21,7 @@ import {
   Alert,
 } from "@mui/material";
 import { useState } from "react";
+import Image from "next/image";
 
 const ContactWithMe = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -89,24 +92,14 @@ const ContactWithMe = () => {
           >
             <Box
               sx={{
-                height: "auto",
+                height: "300px",
+                position: "relative",
                 overflow: "hidden",
                 width: "100%",
                 borderRadius: "10px",
               }}
             >
-              <Box
-                component={"img"}
-                src="/assets/images/headerImg.png"
-                sx={{
-                  width: "100%",
-                  height: "300px",
-                  objectFit: "cover",
-                  objectPosition: "center top",
-                  ":hover": { transform: "scale(1.1)" },
-                  transition: ".4s",
-                }}
-              />
+              <Image src="/assets/images/headerImg.png" alt="Najeeb Ullah" fill sizes="(max-width: 600px) 100vw, 40vw" style={{ objectFit: "cover", objectPosition: "center top" }} />
             </Box>
             <Stack sx={{ gap: { md: "24px", sm: "20px", xs: "16px" } }}>
               <Typography

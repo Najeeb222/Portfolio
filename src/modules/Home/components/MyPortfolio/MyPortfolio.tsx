@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, Container, Stack } from "@mui/material";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
